@@ -1,10 +1,12 @@
 package Modelo;
 
 public class Fruit {
-    int PosX = 0;
-    int PosY = 0;
-    int Points = 100;
-    String Tipo = "manzana";
+    int PosX;
+    int PosY;
+    int Points ;
+    String Tipo;
+
+    public Fruit() { }
 
     public Fruit(int posX, int posY, int points, String tipo) {
         PosX = posX;
@@ -45,12 +47,7 @@ public class Fruit {
         Tipo = tipo;
     }
 
-    public void create_random_fruit(){
-        /* Por definir */;
-    }
-
-    public void delete_fruit(){
-        /* Por definir */;
-    }
 }
+
+
 

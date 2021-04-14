@@ -1,11 +1,11 @@
 package Modelo;
 
 public class Player {
-    int PosX=0;
-    int PosY=0;
-    float Speed=1;
-    int Points=0;
-    int Lifes=1;
+    int PosX;
+    int PosY;
+    float Speed;
+    int Points;
+    int Lifes;
     String State = "vivo";
 
     public Player() { }

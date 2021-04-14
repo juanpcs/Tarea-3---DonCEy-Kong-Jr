@@ -1,16 +1,18 @@
 package Modelo;
 
 public class Crocodile {
-    int PosX=0;
-    int PosY=0;
-    int Speed=1;
-    String Color = "azul";
+    int PosX;
+    int PosY;
+    int Speed;
+    String Tipo;
 
-    public Crocodile(int posX, int posY, int speed, String color) {
+    public Crocodile() { }
+
+    public Crocodile(int posX, int posY, int speed, String tipo) {
         PosX = posX;
         PosY = posY;
         Speed = speed;
-        Color = color;
+        Tipo = tipo;
     }
 
     public int getPosX() {
@@ -37,11 +39,11 @@ public class Crocodile {
         Speed = speed;
     }
 
-    public String getColor() {
-        return Color;
+    public String getTipo() {
+        return Tipo;
     }
 
-    public void setColor(String color) {
-        Color = color;
+    public void setTipo(String tipo) {
+        Tipo = tipo;
     }
 }
