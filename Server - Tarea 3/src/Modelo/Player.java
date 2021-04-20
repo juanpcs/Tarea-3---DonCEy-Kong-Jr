@@ -1,88 +1,83 @@
 package Modelo;
 
 public class Player {
-    int PosX;
-    int PosY;
-    float Speed;
-    int Points;
-    int Lifes;
-    String State = "vivo";
+    java.lang.Integer posX;
+    java.lang.Integer posY;
+    java.lang.Integer speed;
+    java.lang.Integer points;
+    java.lang.Integer lifes;
+    java.lang.Boolean state;
 
     public Player() { }
 
-    public Player(int posX,int posY,float speed,int points,int lifes, String state){
-        PosX = posX;
-        PosY = posY;
-        Speed = speed;
-        Points = points;
-        Lifes = lifes;
-        State = state;
+    public Player(java.lang.Integer posX,java.lang.Integer posY,java.lang.Integer points,java.lang.Integer lifes){
+        this.posX = posX;
+        this.posY = posY;
+        this.speed = 1;
+        this.points = points;
+        this.lifes = lifes;
+        this.state = true;
 }
 
-    public int getPosX() {
-        return PosX;
+    public java.lang.Integer getPosX() {
+        return posX;
     }
 
-    public void setPosX(int posX) {
-        PosX = posX;
+    public void setPosX(java.lang.Integer posX) {
+        this.posX = posX;
     }
 
-    public int getPosY() {
-        return PosY;
+    public java.lang.Integer getPosY() {
+        return posY;
     }
 
-    public void setPosY(int posY) {
-        PosY = posY;
+    public void setPosY(java.lang.Integer posY) {
+        this.posY = posY;
     }
 
-    public float getSpeed() {
-        return Speed;
+    public java.lang.Integer getSpeed() {
+        return speed;
     }
 
-    public void setSpeed(float speed) {
-        Speed = speed;
+    public void setSpeed(java.lang.Integer speed) {
+        this.speed = speed;
     }
 
-    public int getPoints() {
-        return Points;
+    public java.lang.Integer getPoints() {
+        return points;
     }
 
-    public void setPoints(int points) {
-        Points = points;
+    public void setPoints(java.lang.Integer points) {
+        this.points = points;
     }
 
-    public int getLifes() {
-        return Lifes;
+    public java.lang.Integer getLifes() {
+        return lifes;
     }
 
-    public void setLifes(int lifes) {
-        Lifes = lifes;
+    public void setLifes(java.lang.Integer lifes) {
+        this.lifes = lifes;
     }
 
-    public String getState() {
-        return State;
+    public java.lang.Boolean getState() {
+        return state;
     }
 
-    public void setState(String state) {
-        State = state;
+    public void muerte() {
+        this.state = false;
     }
 
-    public void add_Points(int points){
-        setPoints(getPoints() + points);
+    public void addPoints(java.lang.Integer points){
+        this.points += points;
     }
 
-    public void add_Lifes(int lifes){
-        setLifes(getLifes() + lifes);
+    public void addLifes(){
+        this.lifes += 1;
     }
 
-    public void lose_Lifes(int lifes){
-        setLifes(getLifes() - lifes);
-    }
-
-    public void Die(){
-        if(getLifes()<1){
-            setState("muerto");
-        }
-        setState("vivo");
+    public void loseLifes(){
+        this.lifes -=1;
+        this.posX =0;
+        this.posY =0;
     }
 }

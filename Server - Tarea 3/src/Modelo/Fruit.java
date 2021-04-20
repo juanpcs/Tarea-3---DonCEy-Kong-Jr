@@ -1,52 +1,10 @@
 package Modelo;
 
-public class Fruit {
-    int PosX;
-    int PosY;
-    int Points ;
-    String Tipo;
+public class Fruit extends Objeto {
 
-    public Fruit() { }
-
-    public Fruit(int posX, int posY, int points, String tipo) {
-        PosX = posX;
-        PosY = posY;
-        Points = points;
-        Tipo = tipo;
+    public Fruit(java.lang.Integer num, java.lang.Integer posX,java.lang.Integer posY,java.lang.String tipo,java.lang.Integer esp) {
+        super(num,posX,posY,tipo, esp);
     }
-
-    public int getPosX() {
-        return PosX;
-    }
-
-    public void setPosX(int posX) {
-        PosX = posX;
-    }
-
-    public int getPosY() {
-        return PosY;
-    }
-
-    public void setPosY(int posY) {
-        PosY = posY;
-    }
-
-    public int getPoints() {
-        return Points;
-    }
-
-    public void setPoints(int points) {
-        Points = points;
-    }
-
-    public String getTipo() {
-        return Tipo;
-    }
-
-    public void setTipo(String tipo) {
-        Tipo = tipo;
-    }
-
 }
 
 
