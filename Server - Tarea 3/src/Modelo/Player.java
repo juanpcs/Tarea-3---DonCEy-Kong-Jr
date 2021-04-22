@@ -34,6 +34,14 @@ public class Player {
     public void setPosY(java.lang.Integer posY) {
         this.posY = posY;
     }
+    public java.lang.String modificarPosX(java.lang.Integer pasos){
+        posX += pasos;
+        return posX +";";
+    }
+    public java.lang.String modificarPosY(java.lang.Integer pasos){
+        posY += pasos;
+        return posY +";";
+    }
 
     public java.lang.Integer getSpeed() {
         return speed;

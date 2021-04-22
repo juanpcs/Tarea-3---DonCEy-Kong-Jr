@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import Vista.Main;
-import Vista.Main.*;
 
 public class ServerThread extends Thread{
 
@@ -101,6 +100,54 @@ public class ServerThread extends Thread{
         }
         else if(mensaje.equals("vidas2")){
             respuesta = Main.partidas.get(1).getHearts();
+        }else if (mensaje.equals("Arriba1")){
+            respuesta = Main.partidas.get(0).moverArriba();
+        }else if (mensaje.equals("Arriba2")){
+            respuesta = Main.partidas.get(1).moverArriba();
+        }else if (mensaje.equals("Abajo1")){
+            respuesta = Main.partidas.get(0).moverAbajo();
+        }else if (mensaje.equals("Abajo2")){
+            respuesta = Main.partidas.get(1).moverAbajo();
+        }else if (mensaje.equals("derecha1")){
+            respuesta = Main.partidas.get(0).moverDere();
+        }else if (mensaje.equals("derecha2")){
+            respuesta = Main.partidas.get(1).moverDere();
+        }else if (mensaje.equals("izquierda1")){
+            respuesta = Main.partidas.get(0).moverIzq();
+        }else if (mensaje.equals("izquierda2")){
+            respuesta = Main.partidas.get(1).moverIzq();
+        }else if (mensaje.equals("espectadorP1")){
+            if (Main.partidas.get(0).getEspectadores() <2){
+                Main.partidas.get(0).setEspectadores();
+                respuesta = "Viendo Jugador1";
+            }else{
+                respuesta = "Demasiados espectadores";
+            }
+        }else if (mensaje.equals("espectadorP2")){
+            if (Main.partidas.get(1).getEspectadores() <2){
+                Main.partidas.get(1).setEspectadores();
+                respuesta = "Viendo Jugador2";
+            }else{
+                respuesta = "Demasiados espectadores";
+            }
+        }else if(mensaje.equals("DescEsp1")){
+            Main.partidas.get(0).desconEspec();
+            respuesta = "espectador desconectado";
+        }else if(mensaje.equals("DescEsp2")){
+            Main.partidas.get(1).desconEspec();
+            respuesta = "espectador desconectado";
+        }else if(mensaje.equals("getJugador1")){
+            respuesta = Main.partidas.get(0).getJugador();
+        }else if(mensaje.equals("getJugador2")){
+            respuesta = Main.partidas.get(1).getJugador();
+        }else if(mensaje.equals("getCocodrilos1")){
+            respuesta = Main.partidas.get(0).getCocodrilos();
+        }else if(mensaje.equals("getCocodrilos2")){
+            respuesta = Main.partidas.get(1).getCocodrilos();
+        }else if (mensaje.equals("getFrutas1")){
+            respuesta = Main.partidas.get(0).getFrutas();
+        }else if (mensaje.equals("getFrutas2")){
+            respuesta = Main.partidas.get(1).getFrutas();
         }
         return respuesta;
     }

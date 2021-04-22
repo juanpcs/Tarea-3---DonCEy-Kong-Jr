@@ -7,13 +7,17 @@
 
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
 
-int main(int argc , char *argv[])
-{
+/*
+Nombre: crearSocket
+autor: Microsoft
+Adaptación: Sebastian Moya
+Descripción: función que crea un socket cliente
+out: socket cliente
+*/
+SOCKET crearSocket(){
 	WSADATA wsa;
 	SOCKET s;
 	struct sockaddr_in server;
-	char *message , server_reply[2000];
-	int recv_size;
 
 	printf("\nInitialising Winsock...");
 	if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
@@ -45,20 +49,26 @@ int main(int argc , char *argv[])
 	}
 	
 	puts("Connected");
-	
-	//Send some data
-    while (true)
-    {
-        fgets(message, 2000, stdin);
+
+	return s;
+}
+/*
+Nombre: enviar
+Descrpción: función que envia un mensaje al servidor
+In: socket cliente, puntero con el mensaje a enviar, puntero a la respuesta
+out: void
+*/
+void enviar(SOCKET s, char *message,char *response){
+	//char server_reply[2000];
+	int recv_size;
 	if( send(s , message , strlen(message) , 0) < 0)
 	{
 		puts("Send failed");
-		return 1;
 	}
 	puts("Data Send\n");
 	
 	//Receive a reply from the server
-	if((recv_size = recv(s , server_reply , 2000 , 0)) == SOCKET_ERROR)
+	if((recv_size = recv(s , response , 2000 , 0)) == SOCKET_ERROR)
 	{
 		puts("recv failed");
 	}
@@ -66,11 +76,24 @@ int main(int argc , char *argv[])
 	puts("Reply received\n");
 
 	//Add a NULL terminating character to make it a proper string before printing
-	server_reply[recv_size] = '\0';
-	puts(server_reply);
-    }
-    
-	
+	response[recv_size] = '\0';
+}
 
+int main(int argc , char *argv[])
+{
+	//Asi se crea el socket cliente
+	SOCKET s = crearSocket();
+	// se debe crear este buff para guardar la respuesta del servidor
+	char response[2000];
+	// así se debe crear el mensaje que se desea enviar, no olvidar la vuelta de carro
+	char mensaje[]= "nueva\n";
+	char mensaje2[]="getFrutas1\n";
+	//así se hace la consulta al servidor
+	enviar(s,mensaje,response);
+	//imprime la respuesta del servidor
+	printf("%s\n", &response);
+	enviar(s,mensaje2,response);
+	printf("%s\n", &response);
+    
 	return 0;
 }

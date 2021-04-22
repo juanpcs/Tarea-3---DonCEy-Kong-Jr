@@ -37,7 +37,7 @@ public class Partida {
         return jugador.getPoints()+";";
     }
 
-    public Fruit getFrutas(java.lang.Integer numFrut) {
+    public Fruit getFruta(java.lang.Integer numFrut) {
         Fruit frut = null;
         for (java.lang.Integer i =0; i< this.numFrut;i++){
             if(numFrut == (frutas.get(i).num)){
@@ -62,7 +62,18 @@ public class Partida {
         }
         return croc;
     }
-
+    public java.lang.String moverDere(){
+        return jugador.modificarPosX(10);
+    }
+    public java.lang.String moverIzq(){
+        return jugador.modificarPosX(-10);
+    }
+    public java.lang.String moverArriba(){
+        return jugador.modificarPosY(-10);
+    }
+    public java.lang.String moverAbajo(){
+        return jugador.modificarPosY(10);
+    }
     public void setCocodrilos(List<Crocodile> cocodrilos) {
         this.cocodrilos = cocodrilos;
     }
@@ -71,12 +82,34 @@ public class Partida {
         return espectadores;
     }
 
-    public void setEspectadores(java.lang.Integer espectadores) {
-        this.espectadores = espectadores;
+    public void setEspectadores() {
+        this.espectadores +=1;
     }
-
+    public void desconEspec(){
+        espectadores -=1;
+    }
     public java.lang.Integer getNumCroc() {
         return numCroc;
+    }
+    public java.lang.String getFrutas(){
+        java.lang.String respuesta = "";
+        for (java.lang.Integer i=0; i<frutas.size();i++){
+            Fruit fruta = frutas.get(i);
+            respuesta += fruta.num + ","+fruta.posX +","+ fruta.posY+","+fruta.atributoEsp+","+fruta.tipo+";";
+        }
+        return respuesta;
+    }
+    public java.lang.String getCocodrilos(){
+        java.lang.String respuesta = "";
+        for (java.lang.Integer i=0; i<cocodrilos.size();i++){
+            Crocodile croc = cocodrilos.get(i);
+            respuesta += croc.num + ","+croc.posX +","+ croc.posY+","+croc.atributoEsp+","+croc.tipo+";";
+        }
+        return respuesta;
+    }
+    public java.lang.String getJugador(){
+        java.lang.String result = jugador.posX +";"+jugador.posY+";"+jugador.lifes+";"+jugador.points+";"+jugador.state+";"+jugador.speed+";";
+        return result;
     }
 
     public void setNumCroc(java.lang.Integer numCroc) {
@@ -100,9 +133,11 @@ public class Partida {
     }
     public void eliminarCroc(java.lang.Integer numCroc){
         cocodrilos.remove(getCocodrilo(numCroc));
+        numCroc --;
     }
     public void eliminarFruit(java.lang.Integer numFrut){
-        frutas.remove(getFrutas(numFrut));
+        frutas.remove(getFruta(numFrut));
+        numFrut --;
     }
     public java.lang.String attackCroc(){
         jugador.loseLifes();
