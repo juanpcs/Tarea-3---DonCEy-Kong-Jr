@@ -2,15 +2,10 @@ package Vista;
 import Modelo.Partida;
 import Controlador.Servidor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Main {
-
-    public static List<Partida> partidas = new ArrayList<>();
+    public static Partida[] part = new Partida[2];
     public static void main(String[] args) {
-        Partida partida = new Partida();
         //System.out.println(partida.getPosJugador());
         //System.out.println(partida.attackCroc());*/
         Servidor server = new Servidor();

@@ -8,16 +8,27 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase encargada del servidor
+ * @author Sebastian Moya Monge
+ */
 public class Servidor {
     Socket socket;
     ServerSocket serverSocket;
     List<Partida> partidas;
 
+    /**
+     * Constructor de la clase
+     */
     public Servidor() {
         this.socket = null;
         this.serverSocket = null;
         this.partidas = new ArrayList<>();
     }
+
+    /**
+     * Método que inicia el servidor
+     */
     public void iniciar(){
         System.out.println("Server Listening......");
         try{

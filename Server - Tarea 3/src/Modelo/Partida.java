@@ -3,14 +3,21 @@ package Modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase encargada de manejar la partida
+ */
 public class Partida {
-    Player jugador;
-    List<Fruit> frutas;
-    List<Crocodile> cocodrilos;
-    java.lang.Integer espectadores;
-    java.lang.Integer numCroc;
-    java.lang.Integer numFrut;
+    private Player jugador;
+    private List<Fruit> frutas;
+    private List<Crocodile> cocodrilos;
+    private java.lang.Integer espectadores;
+    private java.lang.Integer numCroc;
+    private java.lang.Integer numFrut;
+    private java.lang.Integer speed= 1;
 
+    /**
+     * Constructor de la clase
+     */
     public Partida(){
         this.jugador = new Player(0,0,0,3);
         this.frutas = new ArrayList<Fruit>();
@@ -18,25 +25,44 @@ public class Partida {
         this.frutas.add(new Fruit(2,158,20,"uva",100));
         this.frutas.add(new Fruit(3,200,200,"manzana",200));
         this.cocodrilos = new ArrayList<Crocodile>();
-        this.cocodrilos.add(new Crocodile(1,0,20,"rojo",2));
-        this.cocodrilos.add(new Crocodile(2,20,20,"azul",2));
+        this.cocodrilos.add(new Crocodile(1,0,20,"rojo",speed));
+        this.cocodrilos.add(new Crocodile(2,20,20,"azul",speed));
         this.espectadores =0;
         this.numCroc=2;
         this.numFrut=3;
     }
 
+    /**
+     * Obtiene la posicion en x  y y del jugador, separado por punto y coma
+     * @return string con la posicion del jugador separada por punto y coma
+     */
     public java.lang.String getPosJugador() {
         java.lang.String result= "";
         result = jugador.getPosX() +";"+jugador.getPosY();
         return result;
     }
+
+    /**
+     * Retorna la cantidad de vidas del jugador
+     * @return String con las vidas restantes
+     */
     public java.lang.String getHearts(){
         return jugador.getLifes()+";";
     }
+
+    /**
+     * Funcion que retorna el puntaje
+     * @return string del puntaje del jugador
+     */
     public java.lang.String getPuntaje(){
         return jugador.getPoints()+";";
     }
 
+    /**
+     * Metodo que devuelve una fruta en especifico
+     * @param numFrut id de la fruta
+     * @return objeto Fruit que es la fruta especificada
+     */
     public Fruit getFruta(java.lang.Integer numFrut) {
         Fruit frut = null;
         for (java.lang.Integer i =0; i< this.numFrut;i++){
@@ -52,6 +78,11 @@ public class Partida {
         this.frutas = frutas;
     }
 
+    /**
+     * Metodo que retorna un cocodrilo en especifico
+     * @param numCroc id del cocodrilo
+     * @return objeto de tipo Crocodile que es el cocodrilo deseado
+     */
     public Crocodile getCocodrilo(java.lang.Integer numCroc) {
         Crocodile croc = null;
         for (java.lang.Integer i =0; i< this.numCroc;i++){
@@ -62,15 +93,32 @@ public class Partida {
         }
         return croc;
     }
+
+    /**
+     * Metodo que devuelve la posicion del jugador en x aumentada en 10
+     * @return posicion en X
+     */
     public java.lang.String moverDere(){
         return jugador.modificarPosX(10);
     }
+    /**
+     * Metodo que devuelve la posicion del jugador en x decrementada en 10
+     * @return posicion en X
+     */
     public java.lang.String moverIzq(){
         return jugador.modificarPosX(-10);
     }
+    /**
+     * Metodo que devuelve la posicion del jugador en y aumentada en 10
+     * @return posicion en y
+     */
     public java.lang.String moverArriba(){
         return jugador.modificarPosY(-10);
     }
+    /**
+     * Metodo que devuelve la posicion del jugador en y decrementada en 10
+     * @return posicion en y
+     */
     public java.lang.String moverAbajo(){
         return jugador.modificarPosY(10);
     }
@@ -78,19 +126,35 @@ public class Partida {
         this.cocodrilos = cocodrilos;
     }
 
+    /**
+     * Devuele la cantidad de espectadores del jugador
+     * @return cantidad de espectadores del jugador
+     */
     public java.lang.Integer getEspectadores() {
         return espectadores;
     }
 
+    /**
+     * Aumenta en 1 los espectadores
+     */
     public void setEspectadores() {
         this.espectadores +=1;
     }
+
+    /**
+     * desconecta un espectador de la partida
+     */
     public void desconEspec(){
         espectadores -=1;
     }
     public java.lang.Integer getNumCroc() {
         return numCroc;
     }
+
+    /**
+     * Metodo que obtiene todas la fruta y sus atibutos y los convierte en string
+     * @return total de las frutas separadas por , y ;
+     */
     public java.lang.String getFrutas(){
         java.lang.String respuesta = "";
         for (java.lang.Integer i=0; i<frutas.size();i++){
@@ -99,6 +163,10 @@ public class Partida {
         }
         return respuesta;
     }
+    /**
+     * Metodo que obtiene todas los cocodrilos y sus atibutos y los convierte en string
+     * @return total de los cocodrilos separadas por , y ;
+     */
     public java.lang.String getCocodrilos(){
         java.lang.String respuesta = "";
         for (java.lang.Integer i=0; i<cocodrilos.size();i++){
@@ -107,41 +175,93 @@ public class Partida {
         }
         return respuesta;
     }
+    /**
+     * Metodo que obtiene los atributos del jugador
+     * @return string con todos los atributos del jugador separados por ;
+     * */
     public java.lang.String getJugador(){
-        java.lang.String result = jugador.posX +";"+jugador.posY+";"+jugador.lifes+";"+jugador.points+";"+jugador.state+";"+jugador.speed+";";
+        java.lang.String result = jugador.getPosX() +";"+jugador.getPosY()+";"+jugador.getLifes()+";"+jugador.getPoints()+";"+jugador.getState()+";"+jugador.getSpeed()+";";
         return result;
     }
 
-    public void setNumCroc(java.lang.Integer numCroc) {
-        this.numCroc = numCroc;
-    }
-
-    public java.lang.Integer getNumFrut() {
-        return numFrut;
-    }
-
-    public void setNumFrut(java.lang.Integer numFrut) {
-        this.numFrut = numFrut;
-    }
-    public void addCroc(java.lang.Integer posX,java.lang.Integer posY, java.lang.String tipo, java.lang.Integer speed){
-        this.numCroc +=1;
-        this.cocodrilos.add(new Crocodile(numCroc,posX,posY,tipo,speed));
-    }
-    public void addFruit(java.lang.Integer posX,java.lang.Integer posY, java.lang.String tipo, java.lang.Integer puntos){
-        this.numFrut +=1;
-        this.frutas.add(new Fruit(numFrut,posX,posY,tipo,puntos));
-    }
+    /**
+     * Metodo que elimina un cocodrilo por su id
+     * @param numCroc id del cocodrilo
+     */
     public void eliminarCroc(java.lang.Integer numCroc){
         cocodrilos.remove(getCocodrilo(numCroc));
+        java.lang.Integer i =1;
+        for(Crocodile c : cocodrilos){
+            c.setNum(i);
+            i++;
+        }
         numCroc --;
     }
+
+    /**
+     * Metodo que elimina las frutas por su id
+     * @param numFrut id de la fruta deseada
+     */
     public void eliminarFruit(java.lang.Integer numFrut){
+        jugador.addPoints(getFruta(numFrut).getAtributoEsp());
         frutas.remove(getFruta(numFrut));
+        java.lang.Integer i =1;
+        for(Fruit f : frutas){
+            f.setNum(i);
+            i++;
+        }
         numFrut --;
     }
+
+    /**
+     * Metodo que elimina el una vida del jugador al ser atacado por un cocodrilo y lo devuelve al inicio
+     * @return posicion del jugador con las vidas restantes
+     */
     public java.lang.String attackCroc(){
-        jugador.loseLifes();
-        java.lang.String respuesta= jugador.getPosX() +";"+jugador.getPosY()+";"+jugador.getLifes();
-        return respuesta;
+        if(jugador.getLifes()>0) {
+            jugador.loseLifes();
+            java.lang.String respuesta = jugador.getPosX() + ";" + jugador.getPosY() + ";" + jugador.getLifes();
+            return respuesta;
+        }else{
+            return "GameOver";
+        }
+
+    }
+
+    /**
+     * Metodo que crea un nuevo cocodrilo en la partida
+     * @param posx pos en x del cocodrilo
+     * @param posy pos en y del cocodrilo
+     * @param tipo tipo de cocodrilo
+     * @param speed velocidad del cocodrilo
+     */
+    public void crearCocodrilo(java.lang.Integer posx,java.lang.Integer posy,java.lang.String tipo,java.lang.Integer speed ){
+        numCroc +=1;
+        cocodrilos.add(new Crocodile(numCroc,posx,posy,tipo,speed));
+    }
+
+    /**
+     * Metodo que resetea el juego
+     */
+    private void reset(){
+        this.jugador.setPosX(0);
+        this.jugador.setPosY(0);
+        frutas.clear();
+        cocodrilos.clear();
+        this.frutas.add(new Fruit(1,25,50,"banano",100));
+        this.frutas.add(new Fruit(2,158,20,"uva",100));
+        this.frutas.add(new Fruit(3,200,200,"manzana",200));
+        this.cocodrilos = new ArrayList<Crocodile>();
+        this.cocodrilos.add(new Crocodile(1,0,20,"rojo",speed));
+        this.cocodrilos.add(new Crocodile(2,20,20,"azul",speed));
+    }
+
+    /**
+     * Metodo que aplica cuando gana el jugador, le da una vida y lo devuelve al inicio.
+     */
+    public void win(){
+        this.jugador.aumentarVidas();
+        speed +=1;
+        reset();
     }
 }
