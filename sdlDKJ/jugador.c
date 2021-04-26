@@ -8,7 +8,7 @@
 #include "stdlib.h"
 
 
-
+int mov=10;
 Croco* gencroco(){
     int random;
     random=rand()%3;
@@ -30,8 +30,8 @@ Croco* gencroco(){
 
 }
 void gravedad(Junior* mono,SOCKET s){
-    if (colitLiana(mono->x)==0 && colitPlat(mono->x,mono->y)==0 && mono->y<800){
-        mono->y +=3;
+    if ((colitLiana(mono->x)==0) && (colitPlat(mono->x,mono->y)==0) && (mono->y<800)){
+        mono->y +=mov;
         //SOCKET s = crearSocket();
         char* response[2000];
         char mensaje[]= "Abajo2\n";
@@ -41,19 +41,19 @@ void gravedad(Junior* mono,SOCKET s){
 
 //Funcion que compara la posicion en x y la posicion y del mono para saber si esta en contacto con una plataforma
 int colitPlat(int x,int y){
-    if((y<=502 && y>=498) && (x>=186 && x<=351))
+    if((y<=509 && y>=494) && (x>=186 && x<=351))
         return 1;
-    if((y<=316 && y>=314) && (x>=426 && x<=492))
+    if((y<=322 && y>=309) && (x>=426 && x<=492))
         return 1;
-    if((y<=316 && y>=314) && (x>=665 && x<=732))
+    if((y<=322 && y>=309) && (x>=665 && x<=732))
         return 1;
-    if((y<=497 && y>=494) && (x>=828 && x<=984))
+    if((y<=501 && y>=494) && (x>=828 && x<=984))
         return 1;
     return 0;
 };
 
 //Funcion que compara la posicion en x del mono para saber si esta en contacto con una liana
-int colitLiana(int x){
+int colitLiana(int x,int y){
     if(x>=140 && x<=170)
         {
             return 1;
@@ -130,7 +130,7 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
 
     //movimiento a la izquierda
     if(state[SDL_SCANCODE_LEFT]){
-        mono->x -= 3;
+        mono->x -= mov;
         printf("izquierda.\n");
         char* response[2000];
         char mensaje[]= "izquierda1\n";
@@ -139,7 +139,7 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
 
     //movimiento a la derecha
     if(state[SDL_SCANCODE_RIGHT]){
-        mono->x += 3;
+        mono->x += mov;
         printf("derecha.\n");
         char* response[2000];
         char mensaje[]= "derecha1\n";
@@ -148,8 +148,8 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
 
     //movimiento hacia abajo
     if(state[SDL_SCANCODE_DOWN]){
-            if(mono->y<800  ){
-                mono->y += 3;
+            if(mono->y<800 && colitLiana(mono->x,mono->y)){
+                mono->y += mov;
                 printf("abajo.\n");
                 char* response[2000];
                 char mensaje[]= "Abajo1\n";
@@ -161,16 +161,16 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
 
     //Movimiento hacia arriba
     if(state[SDL_SCANCODE_UP]){
-            if(mono->y>280 && colitLiana(mono->x)){
-                mono->y -= 3;
+            if(mono->y>280 && colitLiana(mono->x,mono->y)){
+                mono->y -= mov;
                 printf("Arriba1\n");
                 char* response[2000];
                 char mensaje[]= "Arriba1\n";
                 enviar(s,mensaje,response);
                 printf("%c\n", &response);
             }
-            if(mono->x>975 && colitLiana(mono->x)){
-                mono->y -= 3;
+            if(mono->x>975 && colitLiana(mono->x,mono->y)){
+                mono->y -= mov;
                 printf("Arriba1\n");
                 char* response[2000];
                 char mensaje[]= "Arriba1\n";
@@ -265,8 +265,8 @@ void jugador1(int vidas,SOCKET s){
 
 
     char* response[2000];
-    char mensaje[]= "Finalizar1\n";
-    enviar(s,mensaje,response);
+    //char mensaje[]= "Finalizar1\n";
+    //enviar(s,mensaje,response);
     //printf("%c\n", &response);
 
     SDL_DestroyTexture(texture);
@@ -284,8 +284,8 @@ void jugador1(int vidas,SOCKET s){
 /////////////
 
 void gravedad2(Junior* mono,SOCKET s){
-    if (colitLiana(mono->x)==0 && colitPlat(mono->x,mono->y)==0 && mono->y<800){
-        mono->y +=3;
+    if (colitLiana(mono->x,mono->y)==0 && colitPlat(mono->x,mono->y)==0 && mono->y<800){
+        mono->y +=mov;
         char* response[2000];
         char mensaje[]= "Abajo2\n";
         enviar(s,mensaje,response);
@@ -337,7 +337,7 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
 
     //movimiento a la izquierda
     if(state[SDL_SCANCODE_LEFT]){
-        mono->x -= 3;
+        mono->x -= mov;
         printf("izquierda.\n");
         //SOCKET s = crearSocket();
         char* response[2000];
@@ -347,7 +347,7 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
 
     //movimiento a la derecha
     if(state[SDL_SCANCODE_RIGHT]){
-        mono->x += 3;
+        mono->x += mov;
         printf("derecha.\n");
         //SOCKET s = crearSocket();
         char* response[2000];
@@ -357,8 +357,8 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
 
     //movimiento hacia abajo
     if(state[SDL_SCANCODE_DOWN]){
-            if(mono->y<800  ){
-                mono->y += 3;
+            if(mono->y<800 && colitLiana(mono->x,mono->y) ){
+                mono->y += mov;
                 printf("abajo.\n");
                 //SOCKET s = crearSocket();
                 char* response[2000];
@@ -371,26 +371,26 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
 
     //Movimiento hacia arriba
     if(state[SDL_SCANCODE_UP]){
-            if(mono->y>280 && colitLiana(mono->x)){
-                mono->y -= 3;
+            if(mono->y>280 && colitLiana(mono->x,mono->y)){
+                mono->y -= mov;
                 printf("Arriba2\n");
                 char* response[2000];
                 char mensaje[]= "Arriba2\n";
                 enviar(s,mensaje,response);
                 printf("%c\n", &response);
-            }
-            if(mono->x>975 && colitLiana(mono->x)){
-                mono->y -= 3;
+            };
+            if(mono->x>975 && colitLiana(mono->x,mono->y)){
+                mono->y -= mov;
                 printf("Arriba2\n");
                 char* response[2000];
                 char mensaje[]= "Arriba2\n";
                 enviar(s,mensaje,response);
                 printf("%c\n", &response);
-            }
+            };
 
-    }
+    };
     return done;
-}
+};
 
 
 void jugador2(int vidas,SOCKET s){

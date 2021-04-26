@@ -36,7 +36,7 @@
 
 1619454527 c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\cliente.h
 
-1619456970 source:c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\jugador.c
+1619461540 source:c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\jugador.c
 	"SDL.h"
 	"SDL_image.h"
 	<stdbool.h>
@@ -55,7 +55,7 @@
 	<stdbool.h>
 	"jugador.h"
 
-1619426561 c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\jugador.h
+1619460049 c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\jugador.h
 	"SDL.h"
 	"SDL_image.h"
 	<stdbool.h>
