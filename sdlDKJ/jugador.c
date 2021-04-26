@@ -132,7 +132,6 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
     if(state[SDL_SCANCODE_LEFT]){
         mono->x -= 3;
         printf("izquierda.\n");
-        //SOCKET s = crearSocket();
         char* response[2000];
         char mensaje[]= "izquierda1\n";
         enviar(s,mensaje,response);
@@ -142,7 +141,6 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
     if(state[SDL_SCANCODE_RIGHT]){
         mono->x += 3;
         printf("derecha.\n");
-        //SOCKET s = crearSocket();
         char* response[2000];
         char mensaje[]= "derecha1\n";
         enviar(s,mensaje,response);
@@ -153,7 +151,6 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
             if(mono->y<800  ){
                 mono->y += 3;
                 printf("abajo.\n");
-                //SOCKET s = crearSocket();
                 char* response[2000];
                 char mensaje[]= "Abajo1\n";
                 enviar(s,mensaje,response);
@@ -167,7 +164,6 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
             if(mono->y>280 && colitLiana(mono->x)){
                 mono->y -= 3;
                 printf("Arriba1\n");
-                SOCKET s = crearSocket();
                 char* response[2000];
                 char mensaje[]= "Arriba1\n";
                 enviar(s,mensaje,response);
@@ -176,7 +172,6 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
             if(mono->x>975 && colitLiana(mono->x)){
                 mono->y -= 3;
                 printf("Arriba1\n");
-                //SOCKET s = crearSocket();
                 char* response[2000];
                 char mensaje[]= "Arriba1\n";
                 enviar(s,mensaje,response);
@@ -265,7 +260,7 @@ void jugador1(int vidas,SOCKET s){
         //SDL_RenderCopyEx(renderer, crocos[1]->sheetTexture, NULL, &rect2, 0, NULL, 0);
 
         SDL_RenderPresent(renderer);
-        SDL_Delay(10);
+        SDL_Delay(100);
     }
 
 
@@ -379,7 +374,6 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
             if(mono->y>280 && colitLiana(mono->x)){
                 mono->y -= 3;
                 printf("Arriba2\n");
-                SOCKET s = crearSocket();
                 char* response[2000];
                 char mensaje[]= "Arriba2\n";
                 enviar(s,mensaje,response);
@@ -388,7 +382,6 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
             if(mono->x>975 && colitLiana(mono->x)){
                 mono->y -= 3;
                 printf("Arriba2\n");
-                //SOCKET s = crearSocket();
                 char* response[2000];
                 char mensaje[]= "Arriba2\n";
                 enviar(s,mensaje,response);
@@ -477,7 +470,7 @@ void jugador2(int vidas,SOCKET s){
         //SDL_RenderCopyEx(renderer, crocos[1]->sheetTexture, NULL, &rect2, 0, NULL, 0);
 
         SDL_RenderPresent(renderer);
-        SDL_Delay(20);
+        SDL_Delay(100);
     }
 
 
