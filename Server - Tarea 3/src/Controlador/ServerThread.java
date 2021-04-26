@@ -136,7 +136,7 @@ public class ServerThread extends Thread{
             respuesta = part[0].moverDere();
         } else if (mensaje.equals("derecha2")) {
             respuesta = part[1].moverDere();
-        } else if (mensaje.equals("2")) {
+        } else if (mensaje.equals("izquierda1")) {
             respuesta = part[0].moverIzq();
         } else if (mensaje.equals("izquierda2")) {
             respuesta = part[1].moverIzq();
