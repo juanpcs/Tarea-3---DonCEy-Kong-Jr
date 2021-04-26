@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1619415457 source:c:\users\efmz2\desktop\sdldkj\sdldkj\main.c
+	"SDL.h"
+	"SDL_image.h"
+	<stdbool.h>
+	<winsock2.h>
+	"cliente.h"
+	"mono.c"
+
+1619406212 source:c:\users\efmz2\desktop\sdldkj\sdldkj\mono.c
+	"SDL.h"
+
+1619406212 c:\users\efmz2\desktop\sdldkj\sdldkj\mono.c
+	"SDL.h"
+
+1619415226 source:c:\users\efmz2\desktop\sdldkj\sdldkj\cliente.c
+	<stdio.h>
+	<winsock2.h>
+	"cliente.h"
+
+1619401654 c:\users\efmz2\desktop\sdldkj\sdldkj\cliente.c
+	<stdio.h>
+	<winsock2.h>
+
+1619415331 c:\users\efmz2\desktop\sdldkj\sdldkj\cliente.h
+	<stdio.h>
+	<winsock2.h>
+
+1619415959 source:c:\users\efmz2\desktop\sdldkj\sdldkj\jugador.c
+	"SDL.h"
+	"SDL_image.h"
+	<stdbool.h>
+	"mono.c"
+
