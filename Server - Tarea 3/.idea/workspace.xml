@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3f7e172-47f2-4044-aa7e-1f356de8c293" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Server - Tarea 3/Controlador/Controlador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server - Tarea 3/Modelo/Crocodile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server - Tarea 3/Modelo/Crocodile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server - Tarea 3/Modelo/Fruit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server - Tarea 3/Modelo/Fruit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server - Tarea 3/Modelo/Partida.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server - Tarea 3/Modelo/Partida.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server - Tarea 3/Modelo/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server - Tarea 3/Modelo/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server - Tarea 3/Vista/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server - Tarea 3/Vista/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controlador/Controlador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controlador/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controlador/ServerThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controlador/Servidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controlador/Servidor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modelo/Crocodile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/Crocodile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modelo/Fruit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/Fruit.java" afterDir="false" />
@@ -38,12 +31,12 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -91,59 +84,5 @@
       <updated>1618791016684</updated>
     </task>
     <servers />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1618991004777">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1618991004777" />
-    <state x="618" y="301" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1618791888662">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="618" y="301" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1618791888662" />
-    <state x="349" y="67" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor" timestamp="1618791885596">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="349" y="67" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor/0.0.1536.824@0.0.1536.824" timestamp="1618791885596" />
-    <state x="550" y="166" key="FileChooserDialogImpl" timestamp="1618791878059">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="550" y="166" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1618791878059" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1619139494914">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1619139494914" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1619139494914">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1619139494914" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1619139494914">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1619139494914" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1619139494914">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1619139494914" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1618987940476">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1618987940476" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1618987940476">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1618987940476" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1618987940476">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1618987940476" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1618987940476">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1618987940476" />
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1618963097465">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1618963097465" />
   </component>
 </project>

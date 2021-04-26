@@ -2,7 +2,7 @@
 
 typedef struct
 {
-    float x,y;
+    int x,y;
     int lives,move;
     SDL_Texture *sheetTexture;
 
