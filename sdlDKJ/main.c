@@ -186,16 +186,16 @@ int eventosMenu(SDL_Window *window)
         done =2;
     }
     //Iniciar espectador a jugador 1
-    if(state[SDL_SCANCODE_KP_3]|state[SDL_SCANCODE_3]){
-        done = 3;
+    if(state[SDL_SCANCODE_KP_3]|state[SDL_SCANCODE_4]){
+        done = 4;
     }
     //Inciar espectador a jugador 2
-    if(state[SDL_SCANCODE_KP_4]|state[SDL_SCANCODE_4]){
-        done =4;
+    if(state[SDL_SCANCODE_KP_4]|state[SDL_SCANCODE_5]){
+        done =5;
     }
     //iniciar pantalla de creacion de cocodrilos
     if(state[SDL_SCANCODE_KP_0]|state[SDL_SCANCODE_0]){
-        done =5;
+        done =7;
     }
     return done;
 }
@@ -238,25 +238,28 @@ void crearMenu(SOCKET s){
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(fondo);
     SDL_DestroyWindow(window);
+    char response[2000];
     if(done == 6){
         //crear ventana para jugador 1
         char mensaje[]= "nueva\n";
         enviar(s,mensaje,response);
-        jugador1(1,s);
+        jugador1(s);
     }else if(done == 2){
         // crear ventana para jugador2
         char mensaje[]= "nueva\n";
         enviar(s,mensaje,response);
-        jugador2(1,s);
-    }else if(done == 3){
+        jugador2(s);
+    }else if(done == 4){
         //crear ventana para espectador del jugador 1
         char mensaje[]= "espectadorP1\n";
         enviar(s,mensaje,response);
-    }else if(done == 4 ){
+        espectador1(s);
+    }else if(done == 5 ){
         //crear ventana para especatador del jugador 2
-        char mensaje[]= "espectadorP2\n";
-        enviar(s,mensaje,response);
-    }else if (done == 5){
+        char mensaje2[]= "espectadorP2\n";
+        enviar(s,mensaje2,response);
+
+    }else if (done == 7){
         crearCocodrilos(s);
 
     }
@@ -268,23 +271,6 @@ int main(int argc, char ** argv)
 {
     SOCKET s = crearSocket();
     crearMenu(s);
-
-    //int respuesta;
-    //printf("Introduzca un numero entero: ");
-    //printf("Ingrese 1 para jugador 1\n");
-    //printf("Ingrese 2 para jugador 2 \n");
-    //printf("Ingrese 3 para expectar al jugador 1 \n");
-    //printf("Ingrese 4 para expectar al jugador 2 \n");
-    //scanf("%d", &respuesta);
-    //if(respuesta==1){
-    //        SOCKET s = crearSocket();
-    //        char* response[2000];
-    //        char mensaje[]= "nueva\n";
-    //        enviar(s,mensaje,response);
-    //        printf("%c\n", &response);
-    //        jugador1(1);
-    //}
-
 }
 
 
