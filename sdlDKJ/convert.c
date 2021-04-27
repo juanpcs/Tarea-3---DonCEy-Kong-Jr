@@ -3,19 +3,41 @@
 int charToInt(char *a, int largo){
     int num =0;
     int in = 1;
-    for(int i=largo-2; i>=0; i--){
+    for(int i=largo-1; i>=0; i--){
         num += (a[i]-'0')*in;
         in = in *10;
     }
     return num;
 }
-/*
-Ejemplo de ejecución, siempre tiene que ser así y ya tiene que estar dividido
-int main(int argc, char* argv[]) {
-    char a[]="12";
-    int result = charToInt(a,sizeof(a)/sizeof(a[0]));
-    printf("%d",result);
-
+int getLargo(char *cadena){
+    int i = 0;
+    while(*cadena != '\0'){
+        i ++;
+        cadena ++;
+    }
+    return i;
+}
+void crearArray(char *a){
+    char *tocken = strtok(a,";");
+    //printf("%d", getLargo(tocken));
+    int t = charToInt(tocken,getLargo(tocken));
+    tocken= strtok(NULL,";");
+    int b = charToInt(tocken,getLargo(tocken));
+    tocken= strtok(NULL,";");
+    //char *j = strtok(NULL,";");
+    int c = charToInt(tocken,getLargo(tocken));
+    tocken= strtok(NULL,";");
+    int y = charToInt(tocken,getLargo(tocken));
+    printf("%d %d %d %d",t,b,c,y);
 
 }
-*/
+
+int main(int argc, char* argv[]) {
+    //SOCKET s = crearSocket();
+
+    char r[]="20;15;2;7";
+    crearArray(r);
+//int i = charToInt(r,getLargo(r));
+    //printf("%d",i);
+
+}
