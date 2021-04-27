@@ -246,7 +246,7 @@ void crearMenu(SOCKET s){
         jugador1(1,s);
     }else if(done == 2){
         // crear ventana para jugador2
-        //jugador2(1,s);
+        jugador2(1,s);
     }else if(done == 3){
         //crear ventana para espectador del jugador 1
     }else if(done == 4 ){

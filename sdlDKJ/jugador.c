@@ -9,6 +9,7 @@
 
 
 int mov=10;
+int vida=1;
 Croco* gencroco(){
     int random;
     random=rand()%3;
@@ -34,10 +35,31 @@ void gravedad(Junior* mono,SOCKET s){
         mono->y +=mov;
         //SOCKET s = crearSocket();
         char* response[2000];
-        char mensaje[]= "Abajo2\n";
+        char mensaje[]= "Abajo1\n";
         enviar(s,mensaje,response);
     }
 };
+
+void moverCroc(Croco* croc){
+    if(croc->tipo==1){//cocodrilo rojo
+        if (croc->y>= 700){
+            croc->direccion=2;
+        }
+        if (croc->y<= 280){
+            croc->direccion=1;
+        }
+        if(croc->y<700 && croc->direccion==1)
+            croc->y+=10*vida;
+        if(croc->y>280 && croc->direccion==2)
+            croc->y-=10*vida;
+    }
+    if(croc->tipo==2){
+        if(croc->y<910){
+            croc->y+=10*vida;
+        }
+    }
+
+}
 
 //Funcion que compara la posicion en x y la posicion y del mono para saber si esta en contacto con una plataforma
 int colitPlat(int x,int y){
@@ -81,7 +103,15 @@ int colitLiana(int x,int y){
 
     return 0;
 }
-
+void colidCoc(Junior* mon,Croco* croc){
+    if (mon->x >= croc->x-40 && mon->x <= croc->x+21){
+        if(mon->y >= croc->y-40 && mon->y-50 <= croc->y){
+            mon->x=150;
+            mon->y=800;
+            vida -=1;
+        }
+    }
+}
 
 //Función que esta atenta a los eventos principamente usada para revisar si se cierra la ventana
 //o si se presiona una tecla del teclado
@@ -204,50 +234,54 @@ void jugador1(int vidas,SOCKET s){
     Junior mono;
     mono.x=150;
     mono.y=800;
-    //Croco *crocos[3];
-    //int ran=rand()%2;
-    //crocos[0]->x=xpos[rand()%9];
-    //crocos[0]->y=280;
-    //crocos[0]->tipo=ran;
-    //if (rand==0)
-    //    crocos[0]->sheetTexture=SDL_CreateTextureFromSurface(renderer,bcroco);
-    //if (rand==1)
-    //    crocos[0]->sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
-
+    Croco rcroc;
+    rcroc.direccion=1;
+    rcroc.x=565;
+    rcroc.y=280;
+    rcroc.tipo=1;
 
     //asignación de textura de objetos
     mono.sheetTexture= SDL_CreateTextureFromSurface(renderer,mono_img);
-
-    //crocos[0]->sheetTexture=SDL_CreateTextureFromSurface(renderer,bcroco);
-    //for(int i=0;i<6;i++){
-    //    if (crocos[i]->tipo==0){
-    //        crocos[i]->sheetTexture=SDL_CreateTextureFromSurface(renderer,bcroco);
-    //    }
-    //    if (crocos[i]->tipo==1){
-    //        crocos[i]->sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
-    //    }
-    //}
+    rcroc.sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, fondo);
 
     //free surface
     SDL_FreeSurface(fondo);
     SDL_FreeSurface(mono_img);
-    //SDL_FreeSurface(bcroco);
-    //SDL_FreeSurface(rcroco);
+    SDL_FreeSurface(bcroco);
+    SDL_FreeSurface(rcroco);
 
 
     while (!done)
     {
-        if(mono.y<185){
+        if(vida==0){
+            done=1;
+            char* response[2000];
+            char mensaje[]= "Finalizar1\n";
+            enviar(s,mensaje,response);
+            printf("%c\n", &response);
 
             SDL_DestroyTexture(texture);
             SDL_DestroyRenderer(renderer);
             SDL_DestroyWindow(window);
             IMG_Quit();
             SDL_Quit();
-            jugador1(vidas++,s);
+            break;
+
         }
+        if(mono.y<185){
+
+            mono.x=150;
+            mono.y=800;
+            vida+=1;
+            char* response[2000];
+            char mensaje[]= "Win1\n";
+            enviar(s,mensaje,response);
+            printf("%c\n", &response);
+        }
+        moverCroc(&rcroc);
         gravedad(&mono,s);
+        colidCoc(&mono,&rcroc);
         SDL_RenderCopy(renderer,texture,NULL,NULL);
         done=processEvents(window,&mono,s);
 
@@ -255,25 +289,17 @@ void jugador1(int vidas,SOCKET s){
         SDL_Rect rect = { mono.x, mono.y, 40, 50 };
         SDL_RenderCopyEx(renderer, mono.sheetTexture, NULL, &rect, 0, NULL, 0);
 
-        //dibuja los cocodrilo
-        //SDL_Rect rect2 = { crocos[1]->x, crocos[1]->y, 21, 40 };
-        //SDL_RenderCopyEx(renderer, crocos[1]->sheetTexture, NULL, &rect2, 0, NULL, 0);
+        //dibuja el cocodrilo
+        SDL_Rect rect2 = { rcroc.x, rcroc.y, 21, 40 };
+        SDL_RenderCopyEx(renderer, rcroc.sheetTexture, NULL, &rect2, 0, NULL, 0);
+
 
         SDL_RenderPresent(renderer);
         SDL_Delay(100);
     }
 
 
-    char* response[2000];
-    //char mensaje[]= "Finalizar1\n";
-    //enviar(s,mensaje,response);
-    //printf("%c\n", &response);
 
-    SDL_DestroyTexture(texture);
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    IMG_Quit();
-    SDL_Quit();
 
 };
 
@@ -414,49 +440,38 @@ void jugador2(int vidas,SOCKET s){
     Junior mono;
     mono.x=150;
     mono.y=800;
-    //Croco *crocos[3];
-    //int ran=rand()%2;
-    //crocos[0]->x=xpos[rand()%9];
-    //crocos[0]->y=280;
-    //crocos[0]->tipo=ran;
-    //if (rand==0)
-    //    crocos[0]->sheetTexture=SDL_CreateTextureFromSurface(renderer,bcroco);
-    //if (rand==1)
-    //    crocos[0]->sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
+    Croco rcroc;
+    rcroc.direccion=1;
+    rcroc.x=565;
+    rcroc.y=280;
+    rcroc.tipo=1;
+
 
 
     //asignación de textura de objetos
     mono.sheetTexture= SDL_CreateTextureFromSurface(renderer,mono_img);
-
-    //crocos[0]->sheetTexture=SDL_CreateTextureFromSurface(renderer,bcroco);
-    //for(int i=0;i<6;i++){
-    //    if (crocos[i]->tipo==0){
-    //        crocos[i]->sheetTexture=SDL_CreateTextureFromSurface(renderer,bcroco);
-    //    }
-    //    if (crocos[i]->tipo==1){
-    //        crocos[i]->sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
-    //    }
-    //}
+    rcroc.sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, fondo);
 
     //free surface
     SDL_FreeSurface(fondo);
     SDL_FreeSurface(mono_img);
-    //SDL_FreeSurface(bcroco);
-    //SDL_FreeSurface(rcroco);
+    SDL_FreeSurface(bcroco);
+    SDL_FreeSurface(rcroco);
 
 
     while (!done)
     {
         if(mono.y<185){
 
-            SDL_DestroyTexture(texture);
-            SDL_DestroyRenderer(renderer);
-            SDL_DestroyWindow(window);
-            IMG_Quit();
-            SDL_Quit();
-            jugador1(vidas++,s);
+            mono.x=150;
+            mono.y=800;
+            char* response[2000];
+            char mensaje[]= "Win2\n";
+            enviar(s,mensaje,response);
+            printf("%c\n", &response);
         }
+        moverCroc(&rcroc);
         gravedad2(&mono,s);
         SDL_RenderCopy(renderer,texture,NULL,NULL);
         done=processEvents2(window,&mono,s);
@@ -466,8 +481,8 @@ void jugador2(int vidas,SOCKET s){
         SDL_RenderCopyEx(renderer, mono.sheetTexture, NULL, &rect, 0, NULL, 0);
 
         //dibuja los cocodrilo
-        //SDL_Rect rect2 = { crocos[1]->x, crocos[1]->y, 21, 40 };
-        //SDL_RenderCopyEx(renderer, crocos[1]->sheetTexture, NULL, &rect2, 0, NULL, 0);
+        SDL_Rect rect2 = { rcroc.x, rcroc.y, 21, 40 };
+        SDL_RenderCopyEx(renderer, rcroc.sheetTexture, NULL, &rect2, 0, NULL, 0);
 
         SDL_RenderPresent(renderer);
         SDL_Delay(100);
