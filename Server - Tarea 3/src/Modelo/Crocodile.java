@@ -13,7 +13,7 @@ public class Crocodile extends Objeto{
      * @param tipo tipo de cocodrilo (rojo o azul)
      * @param esp atributo especial que indica la velocidad del cocodrilo
      */
-    public Crocodile(java.lang.Integer num, java.lang.Integer posX,java.lang.Integer posY,java.lang.String tipo,java.lang.Integer esp) {
+    public Crocodile(java.lang.Integer num, java.lang.Integer posX,java.lang.Integer posY,java.lang.Integer tipo,java.lang.Integer esp) {
         super(num,posX,posY,tipo, esp);
     }
 }

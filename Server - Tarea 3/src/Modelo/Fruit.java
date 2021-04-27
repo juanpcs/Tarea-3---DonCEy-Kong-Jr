@@ -13,7 +13,7 @@ public class Fruit extends Objeto {
      * @param tipo tipo de fruta
      * @param esp puntaje de fruta
      */
-    public Fruit(java.lang.Integer num, java.lang.Integer posX,java.lang.Integer posY,java.lang.String tipo,java.lang.Integer esp) {
+    public Fruit(java.lang.Integer num, java.lang.Integer posX,java.lang.Integer posY,java.lang.Integer tipo,java.lang.Integer esp) {
         super(num,posX,posY,tipo, esp);
     }
 }

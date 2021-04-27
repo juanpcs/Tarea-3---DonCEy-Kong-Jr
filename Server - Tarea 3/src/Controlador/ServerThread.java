@@ -202,10 +202,10 @@ public class ServerThread extends Thread{
         String respuesta = "";
         java.lang.String[] palabras = mensaje.split(",");
         if (palabras[0].equals("cocodrilo1")){
-            part[0].crearCocodrilo(Integer.parseInt(palabras[1]),Integer.parseInt(palabras[2]),palabras[3],Integer.parseInt(palabras[4]));
+            part[0].crearCocodrilo(Integer.parseInt(palabras[1]),Integer.parseInt(palabras[2]),Integer.parseInt(palabras[3]),Integer.parseInt(palabras[4]));
             respuesta = "Cocodrilo creado en partida1";
         }else if(palabras[0].equals("cocodrilo2")) {
-            part[1].crearCocodrilo(Integer.parseInt(palabras[1]), Integer.parseInt(palabras[2]), palabras[3], Integer.parseInt(palabras[4]));
+            part[1].crearCocodrilo(Integer.parseInt(palabras[1]), Integer.parseInt(palabras[2]), Integer.parseInt(palabras[3]), Integer.parseInt(palabras[4]));
             respuesta = "Cocodrilo creado en partida2";
         }else if(palabras[0].equals("EleCoco1")){
             part[0].eliminarCroc(Integer.parseInt(palabras[1]));

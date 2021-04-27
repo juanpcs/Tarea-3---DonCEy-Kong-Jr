@@ -8,7 +8,7 @@ public abstract class  Objeto {
     protected java.lang.Integer num;
     protected java.lang.Integer posX;
     protected java.lang.Integer posY;
-    protected java.lang.String tipo;
+    protected java.lang.Integer tipo;
     protected java.lang.Integer atributoEsp;
 
     /**
@@ -19,7 +19,7 @@ public abstract class  Objeto {
      * @param tipo tipo de objeto
      * @param esp atributo especial
      */
-    public Objeto(java.lang.Integer num, java.lang.Integer posX,java.lang.Integer posY,java.lang.String tipo,java.lang.Integer esp){
+    public Objeto(java.lang.Integer num, java.lang.Integer posX,java.lang.Integer posY,java.lang.Integer tipo,java.lang.Integer esp){
         this.num=num;
         this.posX = posX;
         this.posY = posY;
@@ -51,11 +51,11 @@ public abstract class  Objeto {
         this.posY = posY;
     }
 
-    public String getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
 

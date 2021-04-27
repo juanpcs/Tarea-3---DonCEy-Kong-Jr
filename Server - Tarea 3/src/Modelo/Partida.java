@@ -21,12 +21,12 @@ public class Partida {
     public Partida(){
         this.jugador = new Player(150,800,0,3);
         this.frutas = new ArrayList<Fruit>();
-        this.frutas.add(new Fruit(1,25,50,"banano",100));
-        this.frutas.add(new Fruit(2,158,20,"uva",100));
-        this.frutas.add(new Fruit(3,200,200,"manzana",200));
+        this.frutas.add(new Fruit(1,25,50,0,100));
+        this.frutas.add(new Fruit(2,158,20,0,100));
+        this.frutas.add(new Fruit(3,200,200,0,200));
         this.cocodrilos = new ArrayList<Crocodile>();
-        this.cocodrilos.add(new Crocodile(1,0,20,"rojo",speed));
-        this.cocodrilos.add(new Crocodile(2,20,20,"azul",speed));
+        this.cocodrilos.add(new Crocodile(1,0,20,0,speed));
+        this.cocodrilos.add(new Crocodile(2,20,20,1,speed));
         this.espectadores =0;
         this.numCroc=2;
         this.numFrut=3;
@@ -235,7 +235,7 @@ public class Partida {
      * @param tipo tipo de cocodrilo
      * @param speed velocidad del cocodrilo
      */
-    public void crearCocodrilo(java.lang.Integer posx,java.lang.Integer posy,java.lang.String tipo,java.lang.Integer speed ){
+    public void crearCocodrilo(java.lang.Integer posx,java.lang.Integer posy,java.lang.Integer tipo,java.lang.Integer speed ){
         numCroc +=1;
         cocodrilos.add(new Crocodile(numCroc,posx,posy,tipo,speed));
     }
@@ -248,12 +248,12 @@ public class Partida {
         this.jugador.setPosY(800);
         frutas.clear();
         cocodrilos.clear();
-        this.frutas.add(new Fruit(1,25,50,"banano",100));
-        this.frutas.add(new Fruit(2,158,20,"uva",100));
-        this.frutas.add(new Fruit(3,200,200,"manzana",200));
+        this.frutas.add(new Fruit(1,25,50,0,100));
+        this.frutas.add(new Fruit(2,158,20,0,100));
+        this.frutas.add(new Fruit(3,200,200,0,200));
         this.cocodrilos = new ArrayList<Crocodile>();
-        this.cocodrilos.add(new Crocodile(1,0,20,"rojo",speed));
-        this.cocodrilos.add(new Crocodile(2,20,20,"azul",speed));
+        this.cocodrilos.add(new Crocodile(1,0,20,0,speed));
+        this.cocodrilos.add(new Crocodile(2,20,20,1,speed));
     }
 
     /**
