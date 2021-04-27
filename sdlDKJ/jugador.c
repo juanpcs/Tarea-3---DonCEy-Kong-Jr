@@ -225,7 +225,7 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
 }
 
 
-void jugador1(int vidas,SOCKET s){
+void jugador1(SOCKET s){
 
     //Inicio de SDL y carga de ventana
     SDL_Event event;
@@ -430,7 +430,7 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
 };
 
 
-void jugador2(int vidas,SOCKET s){
+void jugador2(SOCKET s){
 
     //Inicio de SDL y carga de ventana
     SDL_Event event;
