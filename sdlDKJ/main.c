@@ -1,7 +1,6 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include <stdbool.h>
-
 #include "jugador.h"
 
 
@@ -180,7 +179,7 @@ int eventosMenu(SDL_Window *window)
     const Uint8 *state = SDL_GetKeyboardState(NULL);
     //Inciar una jugador
     if(state[SDL_SCANCODE_KP_1] | state[SDL_SCANCODE_1]){
-        done = 1;
+        done = 6;
     }
     //Iniciar Jugador 2
     if(state[SDL_SCANCODE_KP_2]|state[SDL_SCANCODE_2]){
@@ -239,18 +238,24 @@ void crearMenu(SOCKET s){
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(fondo);
     SDL_DestroyWindow(window);
-    if(done == 1){
+    if(done == 6){
         //crear ventana para jugador 1
         char mensaje[]= "nueva\n";
         enviar(s,mensaje,response);
         jugador1(1,s);
     }else if(done == 2){
         // crear ventana para jugador2
+        char mensaje[]= "nueva\n";
+        enviar(s,mensaje,response);
         jugador2(1,s);
     }else if(done == 3){
         //crear ventana para espectador del jugador 1
+        char mensaje[]= "espectadorP1\n";
+        enviar(s,mensaje,response);
     }else if(done == 4 ){
         //crear ventana para especatador del jugador 2
+        char mensaje[]= "espectadorP2\n";
+        enviar(s,mensaje,response);
     }else if (done == 5){
         crearCocodrilos(s);
 
