@@ -10,6 +10,7 @@
 
 int mov=10;
 int vida=1;
+
 Croco* gencroco(){
     int random;
     random=rand()%3;
@@ -103,12 +104,16 @@ int colitLiana(int x,int y){
 
     return 0;
 }
-void colidCoc(Junior* mon,Croco* croc){
+void colidCoc(Junior* mon,Croco* croc,SOCKET s){
     if (mon->x >= croc->x-40 && mon->x <= croc->x+21){
         if(mon->y >= croc->y-40 && mon->y-50 <= croc->y){
             mon->x=150;
             mon->y=800;
             vida -=1;
+            char* response[2000];
+            char mensaje[]= "choque1\n";
+            enviar(s,mensaje,response);
+
         }
     }
 }
@@ -157,7 +162,9 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
 
     const Uint8 *state = SDL_GetKeyboardState(NULL);
 
-
+    if(state[SDL_SCANCODE_KP_1] | state[SDL_SCANCODE_1]){
+        done = 1;
+    }
     //movimiento a la izquierda
     if(state[SDL_SCANCODE_LEFT]){
         mono->x -= mov;
@@ -198,6 +205,11 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
                 char mensaje[]= "Arriba1\n";
                 enviar(s,mensaje,response);
                 printf("%c\n", &response);
+
+
+                char mensaje2[]= "getJugador1\n";
+                enviar(s,mensaje2,response);
+                printf("%c\n", &response);
             }
             if(mono->x>975 && colitLiana(mono->x,mono->y)){
                 mono->y -= mov;
@@ -229,7 +241,7 @@ void jugador1(int vidas,SOCKET s){
     SDL_Surface * rcroco = IMG_Load("imgs/redcroco.png");
 
 
-    int done = 0;
+    int done=0;
     int xpos[]={180,375,510,565,622,750,790,980,1030};
     Junior mono;
     mono.x=150;
@@ -256,19 +268,8 @@ void jugador1(int vidas,SOCKET s){
     {
         if(vida==0){
             done=1;
-            char* response[2000];
-            char mensaje[]= "Finalizar1\n";
-            enviar(s,mensaje,response);
-            printf("%c\n", &response);
 
-            SDL_DestroyTexture(texture);
-            SDL_DestroyRenderer(renderer);
-            SDL_DestroyWindow(window);
-            IMG_Quit();
-            SDL_Quit();
-            break;
-
-        }
+            }
         if(mono.y<185){
 
             mono.x=150;
@@ -281,7 +282,7 @@ void jugador1(int vidas,SOCKET s){
         }
         moverCroc(&rcroc);
         gravedad(&mono,s);
-        colidCoc(&mono,&rcroc);
+        colidCoc(&mono,&rcroc,s);
         SDL_RenderCopy(renderer,texture,NULL,NULL);
         done=processEvents(window,&mono,s);
 
@@ -297,6 +298,16 @@ void jugador1(int vidas,SOCKET s){
         SDL_RenderPresent(renderer);
         SDL_Delay(100);
     }
+    char* response[2000];
+    char mensaje[]= "Finalizar1\n";
+    enviar(s,mensaje,response);
+    printf("%c\n", &response);
+
+    SDL_DestroyTexture(texture);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    IMG_Quit();
+    SDL_Quit();
 
 
 

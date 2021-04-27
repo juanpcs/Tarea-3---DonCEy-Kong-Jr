@@ -2,7 +2,6 @@
 #include "SDL_image.h"
 #include <stdbool.h>
 #include "mono.c"
-#include "cliente.h"
 #include<winsock2.h>
 
 
