@@ -19,7 +19,7 @@ public class Partida {
      * Constructor de la clase
      */
     public Partida(){
-        this.jugador = new Player(0,0,0,3);
+        this.jugador = new Player(150,800,0,3);
         this.frutas = new ArrayList<Fruit>();
         this.frutas.add(new Fruit(1,25,50,"banano",100));
         this.frutas.add(new Fruit(2,158,20,"uva",100));
@@ -244,8 +244,8 @@ public class Partida {
      * Metodo que resetea el juego
      */
     private void reset(){
-        this.jugador.setPosX(0);
-        this.jugador.setPosY(0);
+        this.jugador.setPosX(150);
+        this.jugador.setPosY(800);
         frutas.clear();
         cocodrilos.clear();
         this.frutas.add(new Fruit(1,25,50,"banano",100));
