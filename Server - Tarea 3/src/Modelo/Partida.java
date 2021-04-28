@@ -25,8 +25,8 @@ public class Partida {
         this.frutas.add(new Fruit(2,158,20,0,100));
         this.frutas.add(new Fruit(3,200,200,0,200));
         this.cocodrilos = new ArrayList<Crocodile>();
-        this.cocodrilos.add(new Crocodile(1,180,280,0,speed));
-        this.cocodrilos.add(new Crocodile(2,375,280,1,speed));
+        this.cocodrilos.add(new Crocodile(1,415,280,0,speed));
+        this.cocodrilos.add(new Crocodile(2,525,280,1,speed));
         this.espectadores =0;
         this.numCroc=2;
         this.numFrut=3;
