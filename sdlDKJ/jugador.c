@@ -197,7 +197,6 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
     if(state[SDL_SCANCODE_LEFT]){
             if(mono->x>100){
                 mono->x -= mov;
-                printf("izquierda");
                 char* response[2000];
                 char mensaje[]= "izquierda1\n";
                 enviar(s,mensaje,response);
@@ -209,7 +208,6 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
     if(state[SDL_SCANCODE_RIGHT]){
         if(mono->x < 1070){
             mono->x += mov;
-            printf("derecha");
             char* response[2000];
             char mensaje[]= "derecha1\n";
             enviar(s,mensaje,response);
@@ -220,7 +218,6 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
     if(state[SDL_SCANCODE_DOWN]){
             if(mono->y<800 && colitLiana(mono->x,mono->y)){
                 mono->y += mov;
-                printf("abajo");
                 char* response[2000];
                 char mensaje[]= "Abajo1\n";
                 enviar(s,mensaje,response);
@@ -234,21 +231,19 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
             if(mono->y>280 && colitLiana(mono->x,mono->y)){
                     if (mono->y<800 || mono->x<170){
                             mono->y -= mov;
-                            printf("Arriba1\n");
                             char* response[2000];
                             char mensaje[]= "Arriba1\n";
                             enviar(s,mensaje,response);
-                            printf("%c\n", &response);
+
 
                     }
             }
             if(mono->x>975 && colitLiana(mono->x,mono->y)){
                     mono->y -= mov;
-                    printf("Arriba");
                     char* response[2000];
                     char mensaje[]= "Arriba1\n";
                     enviar(s,mensaje,response);
-                    printf("%c\n", &response);
+
             }
 
     }
@@ -474,7 +469,7 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
     if(state[SDL_SCANCODE_LEFT]){
             if(mono->x>100){
                 mono->x -= mov;
-                printf("izquierda.\n");
+
                 char* response[2000];
                 char mensaje[]= "izquierda2\n";
                 enviar(s,mensaje,response);
@@ -486,7 +481,7 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
     if(state[SDL_SCANCODE_RIGHT]){
         if(mono->x < 1070){
             mono->x += mov;
-            printf("derecha.\n");
+
             char* response[2000];
             char mensaje[]= "derecha2\n";
             enviar(s,mensaje,response);
@@ -511,7 +506,7 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
             if(mono->y>280 && colitLiana(mono->x,mono->y)){
                     if (mono->y<800 || mono->x<170){
                             mono->y -= mov;
-                            printf("Arriba1\n");
+
                             char* response[2000];
                             char mensaje[]= "Arriba1\n";
                             enviar(s,mensaje,response);
@@ -523,7 +518,7 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
                     char* response[2000];
                     char mensaje[]= "Arriba2\n";
                     enviar(s,mensaje,response);
-                    printf("%c\n", &response);
+
             }
 
     }
@@ -598,7 +593,7 @@ void jugador2(SOCKET s){
 
         for(int i = 0; i < 11; i++){
                 if (crocs[i]!=NULL){
-                    //printf("%d",crocs[i]->x);
+
                     moverCrocs(crocs[i]);
                     if (colidCoc(&mono,crocs[i],s)==1){
                         removeCrocs();
