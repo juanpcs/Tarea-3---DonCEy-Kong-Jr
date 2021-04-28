@@ -5,4 +5,4 @@
 #include<winsock2.h>
 
 
-void espectador1(int vidas,SOCKET s);
+void espectador1(SOCKET s);
