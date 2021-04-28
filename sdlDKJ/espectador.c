@@ -35,8 +35,20 @@ void posmono(Junior *mon,SOCKET s){
     int y=charToInt(tocken,getLargo(tocken));
     mon->y=y;
 }
+void posmono2(Junior *mon,SOCKET s){
+    char* response[2000];
+    char mensaje[]= "getJugador2\n";
+    enviar(s,mensaje,response);
+    printf("%c\n", &response);
 
-int eventosEspectador1(SDL_Window *window)
+    char *tocken = strtok(response,";");
+    int x=charToInt(tocken,getLargo(tocken));
+    mon->x=x;
+    tocken= strtok(NULL,";");
+    int y=charToInt(tocken,getLargo(tocken));
+    mon->y=y;
+}
+int eventosEspectador(SDL_Window *window)
 {
 
   SDL_Event event;
@@ -127,7 +139,7 @@ void espectador1(SOCKET s){
 
     while (!done)
     {
-        done = eventosEspectador1(window);
+        done = eventosEspectador(window);
         posmono(&mono,s);
         SDL_RenderCopy(renderer,texture,NULL,NULL);
         done=processEvents(window,&mono,s);
@@ -142,6 +154,73 @@ void espectador1(SOCKET s){
 
     char* response[2000];
     char mensaje[]= "DescEsp1\n";
+    enviar(s,mensaje,response);
+    printf("%c\n", &response);
+
+    SDL_DestroyTexture(texture);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    IMG_Quit();
+    SDL_Quit();
+};
+
+void espectador1(SOCKET s){
+
+    //Inicio de SDL y carga de ventana
+    SDL_Event event;
+    SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_JPG);
+    SDL_Window * window = SDL_CreateWindow("DK Junior",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1200, 907, 0);
+    SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
+
+    //Carga de sprites
+    SDL_Surface * fondo = IMG_Load("imgs/bg.png");
+    SDL_Surface * mono_img = IMG_Load("imgs/jr.png");
+    SDL_Surface * bcroco = IMG_Load("imgs/bluecroco.png");
+    SDL_Surface * rcroco = IMG_Load("imgs/redcroco.png");
+
+
+    int done=0;
+    //int xpos[]={180,375,510,565,622,750,790,980,1030};
+
+    Junior mono;
+    posmono(&mono,s);
+
+    //Croco rcroc;
+    //rcroc.direccion=1;
+    //rcroc.x=565;
+    //rcroc.y=280;
+    //rcroc.tipo=1;
+
+    //asignación de textura de objetos
+    mono.sheetTexture= SDL_CreateTextureFromSurface(renderer,mono_img);
+    //rcroc.sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
+    SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, fondo);
+
+    //free surface
+    SDL_FreeSurface(fondo);
+    SDL_FreeSurface(mono_img);
+    SDL_FreeSurface(bcroco);
+    SDL_FreeSurface(rcroco);
+
+
+    while (!done)
+    {
+        done = eventosEspectador(window);
+        posmono2(&mono,s);
+        SDL_RenderCopy(renderer,texture,NULL,NULL);
+        done=processEvents(window,&mono,s);
+
+        //dibujar el mono
+        SDL_Rect rect = { mono.x, mono.y, 40, 50 };
+        SDL_RenderCopyEx(renderer, mono.sheetTexture, NULL, &rect, 0, NULL, 0);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(100);
+
+    }
+
+    char* response[2000];
+    char mensaje[]= "DescEsp2\n";
     enviar(s,mensaje,response);
     printf("%c\n", &response);
 
