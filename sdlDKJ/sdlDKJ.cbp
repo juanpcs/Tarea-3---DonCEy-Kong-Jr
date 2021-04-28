@@ -36,6 +36,34 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="cliente.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cliente.h" />
+		<Unit filename="cocodrilo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cocodrilo.h" />
+		<Unit filename="convert.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="espectador.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="espectador.h" />
+		<Unit filename="jugador.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="jugador.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mono.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="renderizado.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

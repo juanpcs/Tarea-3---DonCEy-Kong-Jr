@@ -5,23 +5,7 @@
 #include<winsock2.h>
 #include <stdio.h>
 
-int charToInt(char *a, int largo){
-    int num =0;
-    int in = 1;
-    for(int i=largo-1; i>=0; i--){
-        num += (a[i]-'0')*in;
-        in = in *10;
-    }
-    return num;
-}
-int getLargo(char *cadena){
-    int i = 0;
-    while(*cadena != '\0'){
-        i ++;
-        cadena ++;
-    }
-    return i;
-}
+
 void posmono(Junior *mon,SOCKET s){
     char* response[2000];
     char mensaje[]= "getJugador1\n";
@@ -54,7 +38,7 @@ int eventosEspectador(SDL_Window *window)
   SDL_Event event;
   int done = 0;
 
-  //Función que esta atenta a los eventos principamente usada para revisar si se cierra la ventana
+  //Funciï¿½n que esta atenta a los eventos principamente usada para revisar si se cierra la ventana
   //o si
   while(SDL_PollEvent(&event))
   {
@@ -125,7 +109,7 @@ void espectador1(SOCKET s){
     //rcroc.y=280;
     //rcroc.tipo=1;
 
-    //asignación de textura de objetos
+    //asignaciï¿½n de textura de objetos
     mono.sheetTexture= SDL_CreateTextureFromSurface(renderer,mono_img);
     //rcroc.sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, fondo);
@@ -192,7 +176,7 @@ void espectador2(SOCKET s){
     //rcroc.y=280;
     //rcroc.tipo=1;
 
-    //asignación de textura de objetos
+    //asignaciï¿½n de textura de objetos
     mono.sheetTexture= SDL_CreateTextureFromSurface(renderer,mono_img);
     //rcroc.sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, fondo);
