@@ -9,6 +9,8 @@
 int life=1;
 Croco *crocos[10]={NULL};
 
+//Función que le pide al servidor la cantidad de vidas del mono.
+
 void lifes(SOCKET s){
     char* response[2000];
     char mensaje[]= "getVidas1\n";
@@ -17,6 +19,7 @@ void lifes(SOCKET s){
     int vida=charToInt(tocken,getLargo(tocken));
     life=vida-2;
 }
+//Función que le pide al servidor la cantidad de vidas del mono.
 void lifes2(SOCKET s){
     char* response[2000];
     char mensaje[]= "getVidas2\n";
@@ -25,6 +28,7 @@ void lifes2(SOCKET s){
     int vida=charToInt(tocken,getLargo(tocken));
     life=vida-2;
 }
+//Función que pide la lista de cocodrilos al servidor y los agrega al array de cocodrilos.
 void cargarCroc1(SOCKET s){
     char* response[2000];
     char mensaje[]= "getCocodrilos1\n";
@@ -54,6 +58,7 @@ void cargarCroc1(SOCKET s){
         i+=1;
     };
     };
+//Función que pide la lista de cocodrilos al servidor y los agrega al array de cocodrilos.
 
 void cargarCroc2(SOCKET s){
     char* response[2000];
@@ -85,6 +90,7 @@ void cargarCroc2(SOCKET s){
     };
     };
 
+//función que libera el espacio en memoria utilizado por cada cocodrilo
 void removeCroc(){
     for(int i=0;i<11;i++){
         free(crocos[i]);
@@ -92,6 +98,7 @@ void removeCroc(){
     }
 }
 
+//función que actualiza la posición del cocodrilo enviado segun el tipo de cocodrilo que sea.
 void moverCroc(Croco* croc){
     if(croc->tipo==1){//cocodrilo rojo
         if (croc->y>= 700){
@@ -112,6 +119,8 @@ void moverCroc(Croco* croc){
     }
 
 }
+
+//Funcion que actualiza la posicion del mono segun los datos obtenidos del servidor
 void posmono(Junior *mon,SOCKET s){
     char* response[2000];
     char mensaje[]= "getJugador1\n";
@@ -125,6 +134,7 @@ void posmono(Junior *mon,SOCKET s){
     int y=charToInt(tocken,getLargo(tocken));
     mon->y=y;
 }
+//Funcion que actualiza la posicion del mono segun los datos obtenidos del servidor
 void posmono2(Junior *mon,SOCKET s){
     char* response[2000];
     char mensaje[]= "getJugador2\n";
@@ -186,7 +196,7 @@ int eventosEspectador(SDL_Window *window)
 
     return done;
 }
-
+// funciones encargadas de crear el loop de juego y llamar a las funciones de actualización
 void espectador1(SOCKET s){
 
     //Inicio de SDL y carga de ventana
@@ -279,6 +289,7 @@ void espectador1(SOCKET s){
     IMG_Quit();
     SDL_Quit();
 };
+//funciones encargadas de crear el loop de juego y llamar a las funciones de actualización
 
 void espectador2(SOCKET s){
 

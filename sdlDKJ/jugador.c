@@ -44,6 +44,7 @@ void cargarCrocs1(SOCKET s){
     };
     };
 
+//funcion que livera el espacio en memoria utilizado por cada cocodrillo
 void removeCrocs(){
     for(int i=0;i<11;i++){
         free(crocs[i]);
@@ -62,6 +63,7 @@ void gravedad(Junior* mono,SOCKET s){
     }
 };
 
+//función que actualiza la posición del cocodrilo enviado segun el tipo de cocodrilo que sea
 void moverCrocs(Croco* croc){
     if(croc->tipo==1){//cocodrilo rojo
         if (croc->y>= 700){
@@ -252,8 +254,7 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
     }
     return done;
 }
-
-
+//funciones encargadas de crear el loop de juego y llamar a las funciones de actualización
 void jugador1(SOCKET s){
 
     //cargarCrocs1(s);
@@ -397,7 +398,7 @@ void cargarCrocs2(SOCKET s){
         i+=1;
     };
     };
-
+// Función que detecta si el mono y algún cocodrilo se tocaron.
 int colidCoc2(Junior* mon,Croco* croc,SOCKET s){
     if (mon->x >= croc->x-40 && mon->x <= croc->x+21){
         if(mon->y >= croc->y-40 && mon->y-50 <= croc->y){
@@ -529,7 +530,7 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
     return done;
 };
 
-
+//funciones encargadas de crear el loop de juego y llamar a las funciones de actualización
 void jugador2(SOCKET s){
 
 
