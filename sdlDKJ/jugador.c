@@ -11,26 +11,9 @@
 int mov=10;
 int vida=1;
 Croco *crocs[10]={NULL};
-Croco* gencroco(){
-    int random;
-    random=rand()%3;
-    int xpos[]={180,375,510,565,622,750,790,980,1030};
-    if(random==0){
-        Croco croco;
-        croco.x=xpos[rand()%9];
-        croco.y=280;
-        croco.tipo=rand()%3;
-        return &croco;
-    }
-    if(random==2){
-        Croco croco;
-        croco.x=180;
-        croco.y=280;
-        croco.tipo=1;
-        return &croco;
-    }
 
-}
+
+//Función que pide la lista de cocodrilos al servidor y los agraga al array de cocodrilos.
 void cargarCrocs1(SOCKET s){
     char* response[2000];
     char mensaje[]= "getCocodrilos1\n";
@@ -67,6 +50,8 @@ void removeCrocs(){
         crocs[i]= NULL;
     }
 }
+
+//función encargada crear un efecto de gravedad en el mono y hacer que este baje si no esta en una liana o plataforma
 void gravedad(Junior* mono,SOCKET s){
     if ((colitLiana(mono->x)==0) && (colitPlat(mono->x,mono->y)==0) && (mono->y<800)){
         mono->y +=mov;
@@ -112,6 +97,7 @@ int colitPlat(int x,int y){
 };
 
 //Funcion que compara la posicion en x del mono para saber si esta en contacto con una liana
+//recibe la posición x y y del mono
 int colitLiana(int x,int y){
     if(x>=140 && x<=170)
         {
@@ -140,6 +126,9 @@ int colitLiana(int x,int y){
 
     return 0;
 }
+
+//Función que detecta si el mono y algun cocodrilo se tocaron
+//retorna un int, 1 si se tocaron 0 si no lo hicieron
 int colidCoc(Junior* mon,Croco* croc,SOCKET s){
     if (mon->x >= croc->x-40 && mon->x <= croc->x+21){
         if(mon->y >= croc->y-40 && mon->y-50 <= croc->y){
@@ -377,8 +366,8 @@ void jugador1(SOCKET s){
 /////////////
 //jugador 2//
 /////////////
-void dos(){
-}
+
+//Función que pide la lista de cocodrilos al servidor y los agraga al array de cocodrilos.
 void cargarCrocs2(SOCKET s){
     char* response[2000];
     char mensaje[]= "getCocodrilos2\n";
@@ -424,6 +413,7 @@ int colidCoc2(Junior* mon,Croco* croc,SOCKET s){
     }
 }
 
+//función encargada crear un efecto de gravedad en el mono y hacer que este baje si no esta en una liana o plataforma
 void gravedad2(Junior* mono,SOCKET s){
     if (colitLiana(mono->x,mono->y)==0 && colitPlat(mono->x,mono->y)==0 && mono->y<800){
         mono->y +=mov;

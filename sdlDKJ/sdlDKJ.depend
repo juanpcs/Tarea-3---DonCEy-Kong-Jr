@@ -48,11 +48,12 @@
 1619421571 c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\mono.c
 	"SDL.h"
 
-1619588464 source:c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\main.c
+1619641437 source:c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\main.c
 	"SDL.h"
 	"SDL_image.h"
 	<stdbool.h>
 	"jugador.h"
+	<stdlib.h>
 
 1619555251 c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\jugador.h
 	"SDL.h"
@@ -77,7 +78,7 @@
 1619588464 c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\cocodrilo.c
 	"SDL.h"
 
-1619625562 source:c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\espectador.c
+1619641843 source:c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\espectador.c
 	"SDL.h"
 	"SDL_image.h"
 	<stdbool.h>
