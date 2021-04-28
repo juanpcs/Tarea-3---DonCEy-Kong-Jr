@@ -112,7 +112,7 @@ public class ServerThread extends Thread{
                 respuesta= "Partida1";
             }else if(part[1]== null){
                 part[1]= new Partida();
-                respuesta ="partida2";
+                respuesta ="Partida2";
             }else{
                 respuesta = "Demasiados jugadores";
             }
