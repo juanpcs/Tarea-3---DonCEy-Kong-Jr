@@ -37,29 +37,33 @@ void cargarCrocs1(SOCKET s){
     enviar(s,mensaje,response);
     int i=0;
     char *tocken= strtok(response,";");
-    while(tocken!=NULL){
+    int largo=charToInt(tocken,getLargo(tocken));
+    tocken= strtok(NULL,";");
+    while(i<largo){
+        if(tocken==NULL){
+            char* response2[2000];
+        char mensaje2[]= "Abajo1\n";
+        enviar(s,mensaje2,response2);
+        }
+        //obtención de datos
+        int x=charToInt(tocken,getLargo(tocken));
+        tocken= strtok(NULL,";");
+        int y=charToInt(tocken,getLargo(tocken));
+        tocken= strtok(NULL,";");
+        int tipo=charToInt(tocken,getLargo(tocken));
+        tocken= strtok(NULL,";");
+
         if(crocs[i]==NULL){
-                char* response2[2000];
-                char mensaje2[]= "Abajo1\n";
-                enviar(s,mensaje2,response2);
+                //asignación de datos
                 crocs[i]=malloc(sizeof(Croco));
-                int x=charToInt(tocken,getLargo(tocken));
-                printf("%d",x);
+                crocs[i]->y=y;
                 crocs[i]->x=x;
-                tocken= strtok(NULL,";");
-                crocs[i]->y=charToInt(tocken,getLargo(tocken));
-                tocken= strtok(NULL,";");
-                crocs[i]->tipo=charToInt(tocken,getLargo(tocken));
+                crocs[i]->tipo=tipo;
                 crocs[i]->direccion=1;
                 crocs[i]->cargado=0;
-                i++;
-
         }
-
-
-
+        i+=1;
     };
-
     };
 
 void removeCrocs(){
@@ -270,6 +274,7 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
 void jugador1(SOCKET s){
 
     cargarCrocs1(s);
+
     //Inicio de SDL y carga de ventana
     SDL_Event event;
     SDL_Init(SDL_INIT_VIDEO);
@@ -313,22 +318,7 @@ void jugador1(SOCKET s){
     SDL_FreeSurface(bcroco);
     SDL_FreeSurface(rcroco);
 
-    for(int i = 0; i < 11; i++){
-            if (crocs[i]!=NULL){
-                printf("%d",crocs[i]->x);
-                if(crocs[i]->tipo==1)
-                    {
-                    SDL_Rect cocoRect = {crocs[i]->x, crocs[i]->y, 21, 40 };
-                    SDL_RenderCopyEx(renderer,rcocoTexture , NULL, &cocoRect, 0, NULL, 0);
-                    }
 
-                if(crocs[i]->tipo==0)
-                    {
-                    SDL_Rect cocoRect = {crocs[i]->x, crocs[i]->y, 21, 40 };
-                    SDL_RenderCopyEx(renderer,bcocoTexture , NULL, &cocoRect, 0, NULL, 0);
-                    }
-            }
-    }
 
     while (!done)
     {
@@ -360,6 +350,27 @@ void jugador1(SOCKET s){
         SDL_Rect rect2 = { rcroc.x, rcroc.y, 21, 40 };
         SDL_RenderCopyEx(renderer, rcroc.sheetTexture, NULL, &rect2, 0, NULL, 0);
 
+
+        printf("ola\n");
+        for(int i = 0; i < 11; i++){
+                if (crocs[i]!=NULL){
+                    //printf("%d",crocs[i]->x);
+                    printf("tipo\n");
+                    printf("%d",crocs[i]->tipo);
+                    printf("\n");
+                    if(crocs[i]->tipo==1)
+                        {
+                        SDL_Rect cocoRect = {crocs[i]->x, crocs[i]->y, 21, 40 };
+                        SDL_RenderCopyEx(renderer,rcocoTexture , NULL, &cocoRect, 0, NULL, 0);
+                        }
+
+                    if(crocs[i]->tipo==0)
+                        {
+                        SDL_Rect cocoRect = {crocs[i]->x, crocs[i]->y, 21, 40 };
+                        SDL_RenderCopyEx(renderer,bcocoTexture , NULL, &cocoRect, 0, NULL, 0);
+                        }
+                }
+        }
 
         SDL_RenderPresent(renderer);
         SDL_Delay(100);
