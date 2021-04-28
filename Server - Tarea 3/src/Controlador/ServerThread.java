@@ -188,6 +188,10 @@ public class ServerThread extends Thread{
             System.out.println("Partida 2 finalizada");
         }else if(mensaje.equals("Vidas_Puntos1")){
             respuesta = part[0].getVidPunt();
+        }else if(mensaje.equals("getVidas1")){
+            respuesta = part[0].getVidas();
+        }else if(mensaje.equals("getVidas2")){
+            respuesta = part[1].getVidas();
         }
         else{
             respuesta = analizPiezas(mensaje);

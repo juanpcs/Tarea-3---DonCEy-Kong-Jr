@@ -73,6 +73,9 @@ public class Partida {
         }
         return frut;
     }
+    public java.lang.String getVidas(){
+        return jugador.getLifes()+";";
+    }
 
     public void setFrutas(List<Fruit> frutas) {
         this.frutas = frutas;
