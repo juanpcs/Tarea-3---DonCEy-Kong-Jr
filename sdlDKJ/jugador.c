@@ -167,20 +167,25 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
     }
     //movimiento a la izquierda
     if(state[SDL_SCANCODE_LEFT]){
-        mono->x -= mov;
-        printf("izquierda.\n");
-        char* response[2000];
-        char mensaje[]= "izquierda1\n";
-        enviar(s,mensaje,response);
+            if(mono->x>100){
+                mono->x -= mov;
+                printf("izquierda.\n");
+                char* response[2000];
+                char mensaje[]= "izquierda1\n";
+                enviar(s,mensaje,response);
+            }
+
     }
 
     //movimiento a la derecha
     if(state[SDL_SCANCODE_RIGHT]){
-        mono->x += mov;
-        printf("derecha.\n");
-        char* response[2000];
-        char mensaje[]= "derecha1\n";
-        enviar(s,mensaje,response);
+        if(mono->x < 1070){
+            mono->x += mov;
+            printf("derecha.\n");
+            char* response[2000];
+            char mensaje[]= "derecha1\n";
+            enviar(s,mensaje,response);
+        }
     }
 
     //movimiento hacia abajo
@@ -199,25 +204,25 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
     //Movimiento hacia arriba
     if(state[SDL_SCANCODE_UP]){
             if(mono->y>280 && colitLiana(mono->x,mono->y)){
-                mono->y -= mov;
-                printf("Arriba1\n");
-                char* response[2000];
-                char mensaje[]= "Arriba1\n";
-                enviar(s,mensaje,response);
-                printf("%c\n", &response);
-
-
-                char mensaje2[]= "getJugador1\n";
-                enviar(s,mensaje2,response);
-                printf("%c\n", &response);
+                    if (mono->y<800 || mono->x<170){
+                            mono->y -= mov;
+                            printf("Arriba1\n");
+                            char* response[2000];
+                            char mensaje[]= "Arriba1\n";
+                            enviar(s,mensaje,response);
+                            printf("%c\n", &response);
+                            char mensaje2[]= "getCocodrilos1\n";
+                            enviar(s,mensaje2,response);
+                            printf("%c\n", &response);
+                    }
             }
             if(mono->x>975 && colitLiana(mono->x,mono->y)){
-                mono->y -= mov;
-                printf("Arriba1\n");
-                char* response[2000];
-                char mensaje[]= "Arriba1\n";
-                enviar(s,mensaje,response);
-                printf("%c\n", &response);
+                    mono->y -= mov;
+                    printf("Arriba1\n");
+                    char* response[2000];
+                    char mensaje[]= "Arriba1\n";
+                    enviar(s,mensaje,response);
+                    printf("%c\n", &response);
             }
 
     }
