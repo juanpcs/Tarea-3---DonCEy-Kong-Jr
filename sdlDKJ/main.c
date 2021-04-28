@@ -127,13 +127,13 @@ int eventosCrear(SDL_Window *window,SOCKET s)
         enviar(s,mensaje,response);
     }if(state[SDL_SCANCODE_KP_3] | state[SDL_SCANCODE_3]){
         char response[2000];
-        char mensaje[]= "cocodrilo1,765,280,1,2\n";
+        char mensaje[]= "cocodrilo1,815,280,1,2\n";
         enviar(s,mensaje,response);
     }
     //envia al servidor la petición de crear cocodrilos al jugador 2
     if(state[SDL_SCANCODE_KP_4]|state[SDL_SCANCODE_4]){
         char response[2000];
-        char mensaje[]= "cocodrilo1,765,280,0,2\n";
+        char mensaje[]= "cocodrilo1,815,280,0,2\n";
         enviar(s,mensaje,response);
 
     }
@@ -148,13 +148,13 @@ int eventosCrear(SDL_Window *window,SOCKET s)
         enviar(s,mensaje,response);
     }if(state[SDL_SCANCODE_KP_7] | state[SDL_SCANCODE_7]){
         char response[2000];
-        char mensaje[]= "cocodrilo2,765,280,1,2\n";
+        char mensaje[]= "cocodrilo2,815,280,1,2\n";
         enviar(s,mensaje,response);
     }
     //envia al servidor la petición de crear cocodrilos al jugador 2
     if(state[SDL_SCANCODE_KP_8]|state[SDL_SCANCODE_8]){
         char response[2000];
-        char mensaje[]= "cocodrilo2,765,280,0,2\n";
+        char mensaje[]= "cocodrilo2,815,280,0,2\n";
         enviar(s,mensaje,response);
 
     }
