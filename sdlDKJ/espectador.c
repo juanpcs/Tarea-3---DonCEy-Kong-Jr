@@ -164,7 +164,7 @@ void espectador1(SOCKET s){
     SDL_Quit();
 };
 
-void espectador1(SOCKET s){
+void espectador2(SOCKET s){
 
     //Inicio de SDL y carga de ventana
     SDL_Event event;

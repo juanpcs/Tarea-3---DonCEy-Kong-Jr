@@ -325,6 +325,20 @@ void jugador1(SOCKET s){
 //jugador 2//
 /////////////
 
+void colidCoc2(Junior* mon,Croco* croc,SOCKET s){
+    if (mon->x >= croc->x-40 && mon->x <= croc->x+21){
+        if(mon->y >= croc->y-40 && mon->y-50 <= croc->y){
+            mon->x=150;
+            mon->y=800;
+            vida -=1;
+            char* response[2000];
+            char mensaje[]= "choque2\n";
+            enviar(s,mensaje,response);
+
+        }
+    }
+}
+
 void gravedad2(Junior* mono,SOCKET s){
     if (colitLiana(mono->x,mono->y)==0 && colitPlat(mono->x,mono->y)==0 && mono->y<800){
         mono->y +=mov;
@@ -377,32 +391,37 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
     const Uint8 *state = SDL_GetKeyboardState(NULL);
 
 
+    if(state[SDL_SCANCODE_KP_1] | state[SDL_SCANCODE_1]){
+        done = 1;
+    }
     //movimiento a la izquierda
     if(state[SDL_SCANCODE_LEFT]){
-        mono->x -= mov;
-        printf("izquierda.\n");
-        //SOCKET s = crearSocket();
-        char* response[2000];
-        char mensaje[]= "izquierda2\n";
-        enviar(s,mensaje,response);
+            if(mono->x>100){
+                mono->x -= mov;
+                printf("izquierda.\n");
+                char* response[2000];
+                char mensaje[]= "izquierda2\n";
+                enviar(s,mensaje,response);
+            }
+
     }
 
     //movimiento a la derecha
     if(state[SDL_SCANCODE_RIGHT]){
-        mono->x += mov;
-        printf("derecha.\n");
-        //SOCKET s = crearSocket();
-        char* response[2000];
-        char mensaje[]= "derecha2\n";
-        enviar(s,mensaje,response);
+        if(mono->x < 1070){
+            mono->x += mov;
+            printf("derecha.\n");
+            char* response[2000];
+            char mensaje[]= "derecha2\n";
+            enviar(s,mensaje,response);
+        }
     }
 
     //movimiento hacia abajo
     if(state[SDL_SCANCODE_DOWN]){
-            if(mono->y<800 && colitLiana(mono->x,mono->y) ){
+            if(mono->y<800 && colitLiana(mono->x,mono->y)){
                 mono->y += mov;
                 printf("abajo.\n");
-                //SOCKET s = crearSocket();
                 char* response[2000];
                 char mensaje[]= "Abajo2\n";
                 enviar(s,mensaje,response);
@@ -414,23 +433,24 @@ int processEvents2(SDL_Window *window, Junior *mono,SOCKET s)
     //Movimiento hacia arriba
     if(state[SDL_SCANCODE_UP]){
             if(mono->y>280 && colitLiana(mono->x,mono->y)){
-                mono->y -= mov;
-                printf("Arriba2\n");
-                char* response[2000];
-                char mensaje[]= "Arriba2\n";
-                enviar(s,mensaje,response);
-                printf("%c\n", &response);
-            };
+                    if (mono->y<800 || mono->x<170){
+                            mono->y -= mov;
+                            printf("Arriba1\n");
+                            char* response[2000];
+                            char mensaje[]= "Arriba1\n";
+                            enviar(s,mensaje,response);
+                    }
+            }
             if(mono->x>975 && colitLiana(mono->x,mono->y)){
-                mono->y -= mov;
-                printf("Arriba2\n");
-                char* response[2000];
-                char mensaje[]= "Arriba2\n";
-                enviar(s,mensaje,response);
-                printf("%c\n", &response);
-            };
+                    mono->y -= mov;
+                    printf("Arriba2\n");
+                    char* response[2000];
+                    char mensaje[]= "Arriba2\n";
+                    enviar(s,mensaje,response);
+                    printf("%c\n", &response);
+            }
 
-    };
+    }
     return done;
 };
 
@@ -451,7 +471,7 @@ void jugador2(SOCKET s){
     SDL_Surface * rcroco = IMG_Load("imgs/redcroco.png");
 
 
-    int done = 0;
+    int done=0;
     int xpos[]={180,375,510,565,622,750,790,980,1030};
     Junior mono;
     mono.x=150;
@@ -461,8 +481,6 @@ void jugador2(SOCKET s){
     rcroc.x=565;
     rcroc.y=280;
     rcroc.tipo=1;
-
-
 
     //asignación de textura de objetos
     mono.sheetTexture= SDL_CreateTextureFromSurface(renderer,mono_img);
@@ -478,17 +496,23 @@ void jugador2(SOCKET s){
 
     while (!done)
     {
+        if(vida==0){
+            done=1;
+
+            }
         if(mono.y<185){
 
             mono.x=150;
             mono.y=800;
+            vida+=1;
             char* response[2000];
             char mensaje[]= "Win2\n";
             enviar(s,mensaje,response);
             printf("%c\n", &response);
         }
         moverCroc(&rcroc);
-        gravedad2(&mono,s);
+        gravedad(&mono,s);
+        colidCoc2(&mono,&rcroc,s);
         SDL_RenderCopy(renderer,texture,NULL,NULL);
         done=processEvents2(window,&mono,s);
 
@@ -496,15 +520,14 @@ void jugador2(SOCKET s){
         SDL_Rect rect = { mono.x, mono.y, 40, 50 };
         SDL_RenderCopyEx(renderer, mono.sheetTexture, NULL, &rect, 0, NULL, 0);
 
-        //dibuja los cocodrilo
+        //dibuja el cocodrilo
         SDL_Rect rect2 = { rcroc.x, rcroc.y, 21, 40 };
         SDL_RenderCopyEx(renderer, rcroc.sheetTexture, NULL, &rect2, 0, NULL, 0);
+
 
         SDL_RenderPresent(renderer);
         SDL_Delay(100);
     }
-
-
     char* response[2000];
     char mensaje[]= "Finalizar2\n";
     enviar(s,mensaje,response);
