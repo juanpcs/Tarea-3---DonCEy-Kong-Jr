@@ -169,10 +169,13 @@ public class Partida {
      */
     public java.lang.String getCocodrilos(){
         java.lang.String respuesta = "";
+        java.lang.Integer largo=0;
         for (java.lang.Integer i=0; i<cocodrilos.size();i++){
             Crocodile croc = cocodrilos.get(i);
+            largo++;
             respuesta += croc.posX +";"+ croc.posY+";"+croc.tipo+";";
         }
+        respuesta=largo+";"+respuesta;
         return respuesta;
     }
     /**
