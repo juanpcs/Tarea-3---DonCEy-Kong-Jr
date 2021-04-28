@@ -159,7 +159,7 @@ public class Partida {
         java.lang.String respuesta = "";
         for (java.lang.Integer i=0; i<frutas.size();i++){
             Fruit fruta = frutas.get(i);
-            respuesta += fruta.num + ","+fruta.posX +","+ fruta.posY+","+fruta.atributoEsp+","+fruta.tipo+";";
+            respuesta += fruta.num + ";"+fruta.posX +";"+ fruta.posY+";"+fruta.atributoEsp+";"+fruta.tipo+";";
         }
         return respuesta;
     }
@@ -171,7 +171,7 @@ public class Partida {
         java.lang.String respuesta = "";
         for (java.lang.Integer i=0; i<cocodrilos.size();i++){
             Crocodile croc = cocodrilos.get(i);
-            respuesta += croc.posX +","+ croc.posY+","+croc.tipo+";";
+            respuesta += croc.posX +";"+ croc.posY+";"+croc.tipo+";";
         }
         return respuesta;
     }
