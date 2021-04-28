@@ -77,13 +77,14 @@
 1619588464 c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\cocodrilo.c
 	"SDL.h"
 
-1619594793 source:c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\espectador.c
+1619625562 source:c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\espectador.c
 	"SDL.h"
 	"SDL_image.h"
 	<stdbool.h>
 	"mono.c"
 	<winsock2.h>
 	<stdio.h>
+	"cocodrilo.c"
 
 1619595092 source:c:\users\efmz2\desktop\dkj\tarea-3-doncey-kong-jr\sdldkj\convert.c
 	<stdio.h>

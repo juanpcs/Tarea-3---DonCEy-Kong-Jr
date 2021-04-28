@@ -8,6 +8,23 @@
 
 int life=0;
 Croco *crocos[10]={NULL};
+
+void lifes(SOCKET s){
+    char* response[2000];
+    char mensaje[]= "getVidas1\n";
+    enviar(s,mensaje,response);
+    char *tocken = strtok(response,";");
+    int vida=charToInt(tocken,getLargo(tocken));
+    life=vida;
+}
+void lifes2(SOCKET s){
+    char* response[2000];
+    char mensaje[]= "getVidas2\n";
+    enviar(s,mensaje,response);
+    char *tocken = strtok(response,";");
+    int vida=charToInt(tocken,getLargo(tocken));
+    life=vida;
+}
 void cargarCroc1(SOCKET s){
     char* response[2000];
     char mensaje[]= "getCocodrilos1\n";
@@ -217,7 +234,11 @@ void espectador1(SOCKET s){
         //dibujar el mono
         SDL_Rect rect = { mono.x, mono.y, 40, 50 };
         SDL_RenderCopyEx(renderer, mono.sheetTexture, NULL, &rect, 0, NULL, 0);
-
+        lifes(s);
+        if(life==0){
+            done=1;
+            continue;
+        }
         cargarCroc1(s);
         printf("cargados pete");
         for(int i = 0; i < 11; i++){
@@ -307,6 +328,11 @@ void espectador2(SOCKET s){
         SDL_Rect rect = { mono.x, mono.y, 40, 50 };
         SDL_RenderCopyEx(renderer, mono.sheetTexture, NULL, &rect, 0, NULL, 0);
 
+        lifes(s);
+        if(life==0){
+            done=1;
+            continue;
+        }
         cargarCroc2(s);
         printf("cargados pete");
         for(int i = 0; i < 11; i++){
