@@ -25,8 +25,8 @@ public class Partida {
         this.frutas.add(new Fruit(2,158,20,0,100));
         this.frutas.add(new Fruit(3,200,200,0,200));
         this.cocodrilos = new ArrayList<Crocodile>();
-        this.cocodrilos.add(new Crocodile(1,0,20,0,speed));
-        this.cocodrilos.add(new Crocodile(2,20,20,1,speed));
+        this.cocodrilos.add(new Crocodile(1,180,280,0,speed));
+        this.cocodrilos.add(new Crocodile(2,375,280,1,speed));
         this.espectadores =0;
         this.numCroc=2;
         this.numFrut=3;
@@ -171,7 +171,7 @@ public class Partida {
         java.lang.String respuesta = "";
         for (java.lang.Integer i=0; i<cocodrilos.size();i++){
             Crocodile croc = cocodrilos.get(i);
-            respuesta += croc.num + ","+croc.posX +","+ croc.posY+","+croc.atributoEsp+","+croc.tipo+";";
+            respuesta += croc.posX +","+ croc.posY+","+croc.tipo+";";
         }
         return respuesta;
     }
@@ -211,6 +211,9 @@ public class Partida {
             i++;
         }
         numFrut --;
+    }
+    public java.lang.String getVidPunt(){
+        return jugador.getLifes()+";"+jugador.getPoints()+";";
     }
 
     /**
@@ -252,8 +255,8 @@ public class Partida {
         this.frutas.add(new Fruit(2,158,20,0,100));
         this.frutas.add(new Fruit(3,200,200,0,200));
         this.cocodrilos = new ArrayList<Crocodile>();
-        this.cocodrilos.add(new Crocodile(1,0,20,0,speed));
-        this.cocodrilos.add(new Crocodile(2,20,20,1,speed));
+        this.cocodrilos.add(new Crocodile(1,180,280,0,speed));
+        this.cocodrilos.add(new Crocodile(2,375,280,1,speed));
     }
 
     /**
