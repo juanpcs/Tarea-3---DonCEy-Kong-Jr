@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "cocodrilo.c"
 
-int life=0;
+int life=1;
 Croco *crocos[10]={NULL};
 
 void lifes(SOCKET s){
@@ -15,7 +15,7 @@ void lifes(SOCKET s){
     enviar(s,mensaje,response);
     char *tocken = strtok(response,";");
     int vida=charToInt(tocken,getLargo(tocken));
-    life=vida;
+    life=vida-2;
 }
 void lifes2(SOCKET s){
     char* response[2000];
@@ -23,7 +23,7 @@ void lifes2(SOCKET s){
     enviar(s,mensaje,response);
     char *tocken = strtok(response,";");
     int vida=charToInt(tocken,getLargo(tocken));
-    life=vida;
+    life=vida-2;
 }
 void cargarCroc1(SOCKET s){
     char* response[2000];
@@ -193,7 +193,7 @@ void espectador1(SOCKET s){
     SDL_Event event;
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_JPG);
-    SDL_Window * window = SDL_CreateWindow("DK Junior",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1200, 907, 0);
+    SDL_Window * window = SDL_CreateWindow("DK Junior Espectador",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1200, 907, 0);
     SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
 
     //Carga de sprites
@@ -244,7 +244,7 @@ void espectador1(SOCKET s){
         for(int i = 0; i < 11; i++){
                 if (crocos[i]!=NULL){
                     //printf("%d",crocs[i]->x);
-                    moverCrocs(crocos[i]);
+                    moverCroc(crocos[i]);
                     if (colidCoc(&mono,crocos[i],s)==1){
                         removeCroc();
                         cargarCroc1(s);
@@ -286,7 +286,7 @@ void espectador2(SOCKET s){
     SDL_Event event;
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_JPG);
-    SDL_Window * window = SDL_CreateWindow("DK Junior",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1200, 907, 0);
+    SDL_Window * window = SDL_CreateWindow("DK Junior Espectador",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1200, 907, 0);
     SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
 
     //Carga de sprites
@@ -338,7 +338,7 @@ void espectador2(SOCKET s){
         for(int i = 0; i < 11; i++){
                 if (crocos[i]!=NULL){
                     //printf("%d",crocs[i]->x);
-                    moverCrocs(crocos[i]);
+                    moverCroc(crocos[i]);
                     if (colidCoc(&mono,crocos[i],s)==1){
                         removeCroc();
                         cargarCroc2(s);
