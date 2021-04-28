@@ -4,29 +4,102 @@
 #include "mono.c"
 #include<winsock2.h>
 #include <stdio.h>
+#include "cocodrilo.c"
 
-int charToInt(char *a, int largo){
-    int num =0;
-    int in = 1;
-    for(int i=largo-1; i>=0; i--){
-        num += (a[i]-'0')*in;
-        in = in *10;
+int life=0;
+Croco *crocos[10]={NULL};
+void cargarCroc1(SOCKET s){
+    char* response[2000];
+    char mensaje[]= "getCocodrilos1\n";
+    enviar(s,mensaje,response);
+    int i=0;
+    char *tocken= strtok(response,";");
+    int largo=charToInt(tocken,getLargo(tocken));
+    tocken= strtok(NULL,";");
+    while(i<largo){
+        //obtenci贸n de datos
+        int x=charToInt(tocken,getLargo(tocken));
+        tocken= strtok(NULL,";");
+        int y=charToInt(tocken,getLargo(tocken));
+        tocken= strtok(NULL,";");
+        int tipo=charToInt(tocken,getLargo(tocken));
+        tocken= strtok(NULL,";");
+
+        if(crocos[i]==NULL){
+                //asignaci贸n de datos
+                crocos[i]=malloc(sizeof(Croco));
+                crocos[i]->y=y;
+                crocos[i]->x=x;
+                crocos[i]->tipo=tipo;
+                crocos[i]->direccion=1;
+                crocos[i]->cargado=0;
+        }
+        i+=1;
+    };
+    };
+
+void cargarCroc2(SOCKET s){
+    char* response[2000];
+    char mensaje[]= "getCocodrilos2\n";
+    enviar(s,mensaje,response);
+    int i=0;
+    char *tocken= strtok(response,";");
+    int largo=charToInt(tocken,getLargo(tocken));
+    tocken= strtok(NULL,";");
+    while(i<largo){
+        //obtenci贸n de datos
+        int x=charToInt(tocken,getLargo(tocken));
+        tocken= strtok(NULL,";");
+        int y=charToInt(tocken,getLargo(tocken));
+        tocken= strtok(NULL,";");
+        int tipo=charToInt(tocken,getLargo(tocken));
+        tocken= strtok(NULL,";");
+
+        if(crocos[i]==NULL){
+                //asignaci贸n de datos
+                crocos[i]=malloc(sizeof(Croco));
+                crocos[i]->y=y;
+                crocos[i]->x=x;
+                crocos[i]->tipo=tipo;
+                crocos[i]->direccion=1;
+                crocos[i]->cargado=0;
+        }
+        i+=1;
+    };
+    };
+
+void removeCroc(){
+    for(int i=0;i<11;i++){
+        free(crocos[i]);
+        crocos[i]= NULL;
     }
-    return num;
 }
-int getLargo(char *cadena){
-    int i = 0;
-    while(*cadena != '\0'){
-        i ++;
-        cadena ++;
+
+void moverCroc(Croco* croc){
+    if(croc->tipo==1){//cocodrilo rojo
+        if (croc->y>= 700){
+            croc->direccion=2;
+        }
+        if (croc->y<= 280){
+            croc->direccion=1;
+        }
+        if(croc->y<700 && croc->direccion==1)
+            croc->y+=10*life;
+        if(croc->y>280 && croc->direccion==2)
+            croc->y-=10*life;
     }
-    return i;
+    if(croc->tipo==0){//cocodrilo azul
+        if(croc->y<910){
+            croc->y+=10*life;
+        }
+    }
+
 }
 void posmono(Junior *mon,SOCKET s){
     char* response[2000];
     char mensaje[]= "getJugador1\n";
     enviar(s,mensaje,response);
-    printf("%c\n", &response);
+
 
     char *tocken = strtok(response,";");
     int x=charToInt(tocken,getLargo(tocken));
@@ -54,7 +127,7 @@ int eventosEspectador(SDL_Window *window)
   SDL_Event event;
   int done = 0;
 
-  //Funci髇 que esta atenta a los eventos principamente usada para revisar si se cierra la ventana
+  //Funci锟絥 que esta atenta a los eventos principamente usada para revisar si se cierra la ventana
   //o si
   while(SDL_PollEvent(&event))
   {
@@ -112,20 +185,18 @@ void espectador1(SOCKET s){
     SDL_Surface * bcroco = IMG_Load("imgs/bluecroco.png");
     SDL_Surface * rcroco = IMG_Load("imgs/redcroco.png");
 
+    //carga de texturas
+    SDL_Texture *bcocoTexture;
+    SDL_Texture *rcocoTexture;
+    bcocoTexture = SDL_CreateTextureFromSurface(renderer, bcroco);
+    rcocoTexture = SDL_CreateTextureFromSurface(renderer, rcroco);
 
     int done=0;
-    //int xpos[]={180,375,510,565,622,750,790,980,1030};
-
     Junior mono;
     posmono(&mono,s);
 
-    //Croco rcroc;
-    //rcroc.direccion=1;
-    //rcroc.x=565;
-    //rcroc.y=280;
-    //rcroc.tipo=1;
 
-    //asignaci髇 de textura de objetos
+    //asignaci锟絥 de textura de objetos
     mono.sheetTexture= SDL_CreateTextureFromSurface(renderer,mono_img);
     //rcroc.sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, fondo);
@@ -143,10 +214,34 @@ void espectador1(SOCKET s){
         posmono(&mono,s);
         SDL_RenderCopy(renderer,texture,NULL,NULL);
         done=processEvents(window,&mono,s);
-
         //dibujar el mono
         SDL_Rect rect = { mono.x, mono.y, 40, 50 };
         SDL_RenderCopyEx(renderer, mono.sheetTexture, NULL, &rect, 0, NULL, 0);
+
+        cargarCroc1(s);
+        printf("cargados pete");
+        for(int i = 0; i < 11; i++){
+                if (crocos[i]!=NULL){
+                    //printf("%d",crocs[i]->x);
+                    moverCrocs(crocos[i]);
+                    if (colidCoc(&mono,crocos[i],s)==1){
+                        removeCroc();
+                        cargarCroc1(s);
+                    }
+                    if(crocos[i]->tipo==1)
+                        {
+                        SDL_Rect cocoRect = {crocos[i]->x, crocos[i]->y, 21, 40 };
+                        SDL_RenderCopyEx(renderer,rcocoTexture , NULL, &cocoRect, 0, NULL, 0);
+                        }
+
+                    if(crocos[i]->tipo==0)
+                        {
+                        SDL_Rect cocoRect = {crocos[i]->x, crocos[i]->y, 21, 40 };
+                        SDL_RenderCopyEx(renderer,bcocoTexture , NULL, &cocoRect, 0, NULL, 0);
+                        }
+                }
+            }
+
         SDL_RenderPresent(renderer);
         SDL_Delay(100);
 
@@ -164,7 +259,7 @@ void espectador1(SOCKET s){
     SDL_Quit();
 };
 
-void espectador1(SOCKET s){
+void espectador2(SOCKET s){
 
     //Inicio de SDL y carga de ventana
     SDL_Event event;
@@ -179,20 +274,18 @@ void espectador1(SOCKET s){
     SDL_Surface * bcroco = IMG_Load("imgs/bluecroco.png");
     SDL_Surface * rcroco = IMG_Load("imgs/redcroco.png");
 
+    //carga de texturas
+    SDL_Texture *bcocoTexture;
+    SDL_Texture *rcocoTexture;
+    bcocoTexture = SDL_CreateTextureFromSurface(renderer, bcroco);
+    rcocoTexture = SDL_CreateTextureFromSurface(renderer, rcroco);
 
     int done=0;
-    //int xpos[]={180,375,510,565,622,750,790,980,1030};
-
     Junior mono;
     posmono(&mono,s);
 
-    //Croco rcroc;
-    //rcroc.direccion=1;
-    //rcroc.x=565;
-    //rcroc.y=280;
-    //rcroc.tipo=1;
 
-    //asignaci髇 de textura de objetos
+    //asignaci锟絥 de textura de objetos
     mono.sheetTexture= SDL_CreateTextureFromSurface(renderer,mono_img);
     //rcroc.sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, fondo);
@@ -210,10 +303,34 @@ void espectador1(SOCKET s){
         posmono2(&mono,s);
         SDL_RenderCopy(renderer,texture,NULL,NULL);
         done=processEvents(window,&mono,s);
-
         //dibujar el mono
         SDL_Rect rect = { mono.x, mono.y, 40, 50 };
         SDL_RenderCopyEx(renderer, mono.sheetTexture, NULL, &rect, 0, NULL, 0);
+
+        cargarCroc2(s);
+        printf("cargados pete");
+        for(int i = 0; i < 11; i++){
+                if (crocos[i]!=NULL){
+                    //printf("%d",crocs[i]->x);
+                    moverCrocs(crocos[i]);
+                    if (colidCoc(&mono,crocos[i],s)==1){
+                        removeCroc();
+                        cargarCroc2(s);
+                    }
+                    if(crocos[i]->tipo==1)
+                        {
+                        SDL_Rect cocoRect = {crocos[i]->x, crocos[i]->y, 21, 40 };
+                        SDL_RenderCopyEx(renderer,rcocoTexture , NULL, &cocoRect, 0, NULL, 0);
+                        }
+
+                    if(crocos[i]->tipo==0)
+                        {
+                        SDL_Rect cocoRect = {crocos[i]->x, crocos[i]->y, 21, 40 };
+                        SDL_RenderCopyEx(renderer,bcocoTexture , NULL, &cocoRect, 0, NULL, 0);
+                        }
+                }
+            }
+
         SDL_RenderPresent(renderer);
         SDL_Delay(100);
 

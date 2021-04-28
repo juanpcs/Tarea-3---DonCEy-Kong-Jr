@@ -246,6 +246,7 @@ void crearMenu(SOCKET s){
     SDL_DestroyWindow(window);
     char response[2000];
     char comp[]="Partida12";
+    char comp2[]="Viendo Jugador1";
     if(done == 6){
         //crear ventana para jugador 1
         char mensaje[]= "nueva\n";

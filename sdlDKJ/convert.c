@@ -32,12 +32,12 @@ void crearArray(char *a){
 
 }
 
-int main(int argc, char* argv[]) {
+//int main(int argc, char* argv[]) {
     //SOCKET s = crearSocket();
 
-    char r[]="20;15;2;7";
-    crearArray(r);
+//    char r[]="20;15;2;7";
+//    crearArray(r);
 //int i = charToInt(r,getLargo(r));
     //printf("%d",i);
 
-}
+//}
