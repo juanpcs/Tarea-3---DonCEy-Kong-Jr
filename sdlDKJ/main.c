@@ -202,9 +202,7 @@ int eventosMenu(SDL_Window *window)
 void crearCocodrilos(SOCKET s){
     char response[2000];
 	// así se debe crear el mensaje que se desea enviar, no olvidar la vuelta de carro
-	char mensaje[]= "nueva\n";
-	enviar(s,mensaje,response);
-    int done =0;
+	int done =0;
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window *crear= SDL_CreateWindow("Menu",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,500,500,0);
     SDL_Renderer *renderer = SDL_CreateRenderer(crear, -1,0);
@@ -230,6 +228,7 @@ void crearMenu(SOCKET s){
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer,fondo);
     SDL_RenderCopy(renderer, texture,NULL,NULL);
     SDL_RenderPresent(renderer);
+    int reiniciar=0;
     while(done == 0){
         done = eventosMenu(window);
         SDL_Delay(10);
@@ -239,16 +238,51 @@ void crearMenu(SOCKET s){
     SDL_FreeSurface(fondo);
     SDL_DestroyWindow(window);
     char response[2000];
+    char comp[]="Partida12";
     if(done == 6){
         //crear ventana para jugador 1
         char mensaje[]= "nueva\n";
         enviar(s,mensaje,response);
-        jugador1(s);
-    }else if(done == 2){
+        //puts(comp[1]);
+        //puts(response[1]);
+        if(comp[0]==response[0] && comp[7]==response[7])
+        {
+               reiniciar=1;
+               jugador1(s);
+        }
+
+
+        if(comp[0]==response[0] && comp[8]==response[7])
+        {
+            reiniciar=1;
+            jugador2(s);
+        }
+        if (reiniciar!=1)
+            {
+                puts("Maximo de jugadores alcanzado");
+                crearMenu(s);
+            }
+
+        }else if(done == 2){
         // crear ventana para jugador2
         char mensaje[]= "nueva\n";
-        enviar(s,mensaje,response);
-        jugador2(s);
+        if(comp[0]==response[0] && comp[7]==response[7])
+        {
+               reiniciar=1;
+               jugador1(s);
+        }
+
+
+        if(comp[0]==response[0] && comp[8]==response[7])
+        {
+            reiniciar=0;
+            jugador2(s);
+        }
+        if (reiniciar!=1)
+            {
+                puts("Maximo de jugadores alcanzado");
+                crearMenu(s);
+            }
     }else if(done == 4){
         //crear ventana para espectador del jugador 1
         char mensaje[]= "espectadorP1\n";
