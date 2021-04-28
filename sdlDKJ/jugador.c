@@ -10,7 +10,7 @@
 
 int mov=10;
 int vida=1;
-
+Croco *crocs[10]={NULL};
 Croco* gencroco(){
     int random;
     random=rand()%3;
@@ -30,6 +30,43 @@ Croco* gencroco(){
         return &croco;
     }
 
+}
+void cargarCrocs1(SOCKET s){
+    char* response[2000];
+    char mensaje[]= "getCocodrilos1\n";
+    enviar(s,mensaje,response);
+    int i=0;
+    char *tocken= strtok(response,";");
+    while(tocken!=NULL){
+        if(crocs[i]==NULL){
+                char* response2[2000];
+                char mensaje2[]= "Abajo1\n";
+                enviar(s,mensaje2,response2);
+                crocs[i]=malloc(sizeof(Croco));
+                int x=charToInt(tocken,getLargo(tocken));
+                printf("%d",x);
+                crocs[i]->x=x;
+                tocken= strtok(NULL,";");
+                crocs[i]->y=charToInt(tocken,getLargo(tocken));
+                tocken= strtok(NULL,";");
+                crocs[i]->tipo=charToInt(tocken,getLargo(tocken));
+                crocs[i]->direccion=1;
+                crocs[i]->cargado=0;
+                i++;
+
+        }
+
+
+
+    };
+
+    };
+
+void removeCrocs(){
+    for(int i=0;i<11;i++){
+        free(crocs[i]);
+        crocs[i]= NULL;
+    }
 }
 void gravedad(Junior* mono,SOCKET s){
     if ((colitLiana(mono->x)==0) && (colitPlat(mono->x,mono->y)==0) && (mono->y<800)){
@@ -232,6 +269,7 @@ int processEvents(SDL_Window *window, Junior *mono,SOCKET s)
 
 void jugador1(SOCKET s){
 
+    cargarCrocs1(s);
     //Inicio de SDL y carga de ventana
     SDL_Event event;
     SDL_Init(SDL_INIT_VIDEO);
@@ -245,6 +283,11 @@ void jugador1(SOCKET s){
     SDL_Surface * bcroco = IMG_Load("imgs/bluecroco.png");
     SDL_Surface * rcroco = IMG_Load("imgs/redcroco.png");
 
+    //carga de texturas
+    SDL_Texture *bcocoTexture;
+    SDL_Texture *rcocoTexture;
+    bcocoTexture = SDL_CreateTextureFromSurface(renderer, bcroco);
+    rcocoTexture = SDL_CreateTextureFromSurface(renderer, rcroco);
 
     int done=0;
     int xpos[]={180,375,510,565,622,750,790,980,1030};
@@ -262,12 +305,30 @@ void jugador1(SOCKET s){
     rcroc.sheetTexture=SDL_CreateTextureFromSurface(renderer,rcroco);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, fondo);
 
+
+
     //free surface
     SDL_FreeSurface(fondo);
     SDL_FreeSurface(mono_img);
     SDL_FreeSurface(bcroco);
     SDL_FreeSurface(rcroco);
 
+    for(int i = 0; i < 11; i++){
+            if (crocs[i]!=NULL){
+                printf("%d",crocs[i]->x);
+                if(crocs[i]->tipo==1)
+                    {
+                    SDL_Rect cocoRect = {crocs[i]->x, crocs[i]->y, 21, 40 };
+                    SDL_RenderCopyEx(renderer,rcocoTexture , NULL, &cocoRect, 0, NULL, 0);
+                    }
+
+                if(crocs[i]->tipo==0)
+                    {
+                    SDL_Rect cocoRect = {crocs[i]->x, crocs[i]->y, 21, 40 };
+                    SDL_RenderCopyEx(renderer,bcocoTexture , NULL, &cocoRect, 0, NULL, 0);
+                    }
+            }
+    }
 
     while (!done)
     {
@@ -304,6 +365,7 @@ void jugador1(SOCKET s){
         SDL_Delay(100);
     }
     char* response[2000];
+    removeCrocs();
     char mensaje[]= "Finalizar1\n";
     enviar(s,mensaje,response);
     printf("%c\n", &response);
