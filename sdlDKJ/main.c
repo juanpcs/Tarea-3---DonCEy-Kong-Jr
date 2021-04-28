@@ -116,7 +116,39 @@ int eventosCrear(SDL_Window *window,SOCKET s)
 
     //envia al servidor la petición de crear cocodrilos al jugador1
     if(state[SDL_SCANCODE_KP_1] | state[SDL_SCANCODE_1]){
-        char response[2000];
+            int rand;
+            int randtipo;
+            rand=rand() % 6;
+            randtipo=rand() % 2;
+            char response[2000];
+            if (randtipo==0){
+                    if (rand==0)
+                        char mensaje[]= "cocodrilo1,415,280,0,2\n";
+                    if (rand==1)
+                        char mensaje[]= "cocodrilo1,525,280,0,2\n";
+                    if (rand==2)
+                        char mensaje[]= "cocodrilo1,575,280,0,2\n";
+                    if (rand==3)
+                        char mensaje[]= "cocodrilo1,765,280,0,2\n";
+                    if (rand==4)
+                        char mensaje[]= "cocodrilo1,815,280,0,2\n";
+                    if (rand==5)
+                        char mensaje[]= "cocodrilo1,1005,280,0,2\n";
+            }
+        if (randtipo==1){
+                    if (rand==0)
+                        char mensaje[]= "cocodrilo1,415,280,1,2\n";
+                    if (rand==1)
+                        char mensaje[]= "cocodrilo1,525,280,1,2\n";
+                    if (rand==2)
+                        char mensaje[]= "cocodrilo1,575,280,1,2\n";
+                    if (rand==3)
+                        char mensaje[]= "cocodrilo1,765,280,1,2\n";
+                    if (rand==4)
+                        char mensaje[]= "cocodrilo1,815,280,1,2\n";
+                    if (rand==5)
+                        char mensaje[]= "cocodrilo1,1005,280,1,2\n";
+            }
         char mensaje[]= "cocodrilo1,575,280,1,2\n";
         enviar(s,mensaje,response);
     }if(state[SDL_SCANCODE_KP_2] | state[SDL_SCANCODE_2]){
