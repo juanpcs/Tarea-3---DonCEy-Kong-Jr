@@ -128,23 +128,6 @@ void espectador1(SOCKET s){
     while (!done)
     {
         done = eventosEspectador1(window);
-        //if(vida==0){
-        //    done=1;
-        //    }
-        //if(mono.y<185){
-        //   mono.x=150;
-        //    mono.y=800;
-        //    vida+=1;
-        //    char* response[2000];
-        //    char mensaje[]= "Win1\n";
-        //    enviar(s,mensaje,response);
-        //    printf("%c\n", &response);
-        //}
-        //moverCroc(&rcroc);
-        //gravedad(&mono,s);
-        //colidCoc(&mono,&rcroc,s);
-
-        //Actualiza la posción del mono
         posmono(&mono,s);
         SDL_RenderCopy(renderer,texture,NULL,NULL);
         done=processEvents(window,&mono,s);
@@ -152,12 +135,6 @@ void espectador1(SOCKET s){
         //dibujar el mono
         SDL_Rect rect = { mono.x, mono.y, 40, 50 };
         SDL_RenderCopyEx(renderer, mono.sheetTexture, NULL, &rect, 0, NULL, 0);
-
-        //dibuja el cocodrilo
-        //SDL_Rect rect2 = { rcroc.x, rcroc.y, 21, 40 };
-        //SDL_RenderCopyEx(renderer, rcroc.sheetTexture, NULL, &rect2, 0, NULL, 0);
-
-
         SDL_RenderPresent(renderer);
         SDL_Delay(100);
 
