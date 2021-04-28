@@ -115,8 +115,8 @@ public class Player {
      */
     public void loseLifes(){
         this.lifes -=1;
-        this.posX =0;
-        this.posY =0;
+        this.posX =150;
+        this.posY =800;
     }
 
     /**
